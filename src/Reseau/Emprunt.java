@@ -17,7 +17,25 @@ public class Emprunt {
         this.bibliotheque = bibliotheque;
     }
 
+    public boolean emprunter(Document document){
+        if(listeEmprunt.size() < nbLivreMax) {
+            //if(/* fonction pour savoir si le document est présent dans la bibliotheque*/){
+                listeEmprunt.add(document);
+                return true;
+            //}
+        }else{
+            return false;
+        }
+    }
 
+    public boolean rendre(Document document){
+        if(listeEmprunt.isEmpty()){
+            return false;
+        }else if(listeEmprunt.contains(document)){
+            return true;
+        }
+        return false;
+    }
 
 
 }
