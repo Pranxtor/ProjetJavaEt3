@@ -26,7 +26,7 @@ public class Bibliotheque {
         searchISBN = new HashMap<>();
         clients = new HashSet<>();
     }
-    
+
    public Document rechercheEAN(String EAN) {
 	   if (searchEAN.containsKey(EAN)) {
 		   return searchEAN.get(EAN);
@@ -72,10 +72,21 @@ public class Bibliotheque {
 		}
 		return listeDoc;
 	}
-	
+
+
+	// Recherche par série
 	/*public ArrayList<Document> consulterSerie(String titre){
 		
 	}*/
+
+	// Rechercher par date
+
+
+
+	// Rechercher par période
+
+
+
 
 	public static ArrayList<Document> consulterReseau(String nom){
     	ArrayList<Document> listDoc = new ArrayList<>();
@@ -111,6 +122,18 @@ public class Bibliotheque {
 			}
 		}
 		return listDoc;
+	}
+
+	public boolean echangeDocument(Bibliotheque biblio, Document doc){
+		boolean estFait;
+		if(biblio.collection.containsKey(doc) && this.collection.containsKey(doc)){
+			biblio.collection.replace(doc,biblio.collection.get(doc)+1);
+			this.collection.replace(doc, this.collection.get(doc)-1);
+			estFait = true;
+		}
+		else
+			estFait = false;
+		return estFait;
 	}
 
     public boolean ajouterDocument(Document doc,Integer nbExemplaire) {//moi
@@ -171,6 +194,18 @@ public class Bibliotheque {
     	}
     	return docs;
     }
+
+    public ArrayList<Document> consulterToutDocReseau(){
+		ArrayList<Document> docs = new ArrayList<>();
+		ArrayList<Document> listIntermediaire = new ArrayList<>();
+		for(Bibliotheque bibliotheque : reseauBibliotheque){
+			listIntermediaire = bibliotheque.consulterToutDoc();
+			for(Document document : listIntermediaire){
+				docs.add(document);
+			}
+		}
+		return docs;
+	}
 
 	@Override
 	public int hashCode() {

@@ -18,4 +18,8 @@ public class Client {
         return nom.ajouterClient(this);
     }
 
+    public boolean estInscrit(Bibliotheque bibliotheque){
+        return this.bibliotheque.contains(bibliotheque);
+    }
+
 }

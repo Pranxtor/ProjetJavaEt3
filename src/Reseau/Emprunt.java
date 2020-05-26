@@ -11,6 +11,10 @@ public class Emprunt {
     private Bibliotheque bibliotheque;
 
     public Emprunt(int nombreLivreMax, Client client, Bibliotheque bibliotheque){
+        if(!client.estInscrit(bibliotheque)){
+            bibliotheque.ajouterClient(client);
+            client.inscrire(bibliotheque);
+        }
         this.nbLivreMax = nombreLivreMax;
         listeEmprunt = new ArrayList<>();
         this.client = client;

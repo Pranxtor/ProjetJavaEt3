@@ -13,6 +13,7 @@ public abstract class Document {
     private int nbExemplaire;
     private Integer numeroSerie;//numero dans la serie
 
+    // Constructeur qui ne prend en compte ni l'EAN ni le numero de série
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, int nombreExemplaire){
         this.titre = titre;
         this.numNotice = numNotice;
@@ -22,21 +23,26 @@ public abstract class Document {
         this.datePublication = datePublication;
         this.nbExemplaire = nombreExemplaire;
     }
+
+    // Constructeur qui prend en compte l'EAN mais pas le numero de série
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, int nombreExemplaire){
     	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
     	this.EAN = EAN;
     }
+
+    // Constructeur qui prend en compte le numero de série mais pas l'EAN
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire){
     	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
     	this.numeroSerie =numeroSerie;
     }
-    
+
+    // Constructeur qui prend tout en compte
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire){
     	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
     	this.numeroSerie = numeroSerie;
     	this.EAN = EAN;
     }
-   
+
     public String getEAN(){
         return this.EAN;
     }
