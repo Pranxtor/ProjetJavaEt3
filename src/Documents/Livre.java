@@ -9,4 +9,7 @@ public class Livre extends Document{
         super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, EAN, nombreExemplaire);
     }
 
+    public String getISBN(){
+        return this.ISBN;
+    }
 }
