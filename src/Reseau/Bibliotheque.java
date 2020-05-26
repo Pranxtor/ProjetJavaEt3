@@ -3,6 +3,7 @@ package Reseau;
 import Documents.Document;
 import Documents.Livre;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -69,7 +70,43 @@ public class Bibliotheque {
 				listeDoc.add(doc);
 			}
 		}
-		return  listeDoc;
+		return listeDoc;
+	}
+
+	public static ArrayList<Document> consulterReseau(String nom){
+    	ArrayList<Document> listDoc = new ArrayList<>();
+    	ArrayList<Document> listIntermediaire = new ArrayList<>();
+    	for(Bibliotheque bibliotheque : reseauBibliotheque){
+			listIntermediaire = bibliotheque.consulter(nom);
+    		for(Document doc : listIntermediaire){
+    			listDoc.add(doc);
+			}
+		}
+    	return listDoc;
+	}
+
+	public static ArrayList<Document> consulterReseau(String nom, String prenom){
+		ArrayList<Document> listDoc = new ArrayList<>();
+		ArrayList<Document> listIntermediaire = new ArrayList<>();
+		for(Bibliotheque bibliotheque : reseauBibliotheque){
+			listIntermediaire = bibliotheque.consulter(nom,prenom);
+			for(Document doc : listIntermediaire){
+				listDoc.add(doc);
+			}
+		}
+		return listDoc;
+	}
+
+	public static ArrayList<Document> consulterPrenomReseau(String prenom){
+		ArrayList<Document> listDoc = new ArrayList<>();
+		ArrayList<Document> listIntermediaire = new ArrayList<>();
+		for(Bibliotheque bibliotheque : reseauBibliotheque){
+			listIntermediaire = bibliotheque.consulterPrenom(prenom);
+			for(Document doc : listIntermediaire){
+				listDoc.add(doc);
+			}
+		}
+		return listDoc;
 	}
 
     public boolean ajouterDocument(Document doc,Integer nbExemplaire) {//moi
