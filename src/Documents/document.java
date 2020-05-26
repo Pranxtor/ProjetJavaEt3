@@ -27,4 +27,31 @@ public abstract class Document {
         return this.EAN;
     }
 
+    public String getEditeur(){
+        return this.editeur;
+    }
+
+    public String getNomAuteur(){
+        return this.nomAuteur;
+    }
+
+    public String getPrenomAuteur(){
+        return this.prenomAuteur;
+    }
+
+    public String getTitre(){
+        return this.titre;
+    }
+
+    public int getNumNotice(){
+        return this.numNotice;
+    }
+
+    public Date getDatePublication(){
+        return this.datePublication;
+    }
+
+    public int getNbExemplaire(){
+        return this.nbExemplaire;
+    }
 }

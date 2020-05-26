@@ -15,6 +15,13 @@ public class Bibliotheque {
 
     private static HashSet<Bibliotheque> reseauBibliotheque;
 
+    public Bibliotheque(String nom, String adresse){
+        this.nom = nom;
+        this.adresse = adresse;
+        collection = new HashSet<>();
+        searchISBN = new HashMap<>();
+    }
+
 
 
 
