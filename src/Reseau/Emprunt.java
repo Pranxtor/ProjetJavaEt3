@@ -18,15 +18,13 @@ public class Emprunt {
     }
 
     public boolean emprunter(Document document){
-        if(listeEmprunt.size() < nbLivreMax) {
-            //if(/*Si le document se trouve dans la bibliothèque*/){
-                listeEmprunt.add(document);
-                bibliotheque.emprunter(document);
-                return true;
-            //}
-        }else{
-            return false;
+        if(listeEmprunt.size() < nbLivreMax && bibliotheque.emprunter(document)) {
+            listeEmprunt.add(document);
+            System.out.println("Le document est dans la bibliothèque");
+            return true;
         }
+        System.out.println("Le document n'est pas dans la bibliothèque");
+        return false;
     }
 
     public boolean rendre(Document document){
