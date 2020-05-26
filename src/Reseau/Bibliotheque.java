@@ -23,6 +23,7 @@ public class Bibliotheque {
         this.adresse = adresse;
         collection = new HashMap<>();
         searchISBN = new HashMap<>();
+        clients = new HashSet<>();
     }
     
    public Document rechercheEAN(String EAN) {
@@ -40,7 +41,37 @@ public class Bibliotheque {
 	   else
 		   return	null;
     }
-    
+
+    public ArrayList<Document> consulterParNom(String nom){
+		ArrayList<Document> listeDoc = new ArrayList<>();
+		for(Document doc : collection.keySet()){
+			if(doc.getNomAuteur() == nom){
+				listeDoc.add(doc);
+			}
+		}
+		return  listeDoc;
+	}
+
+	public ArrayList<Document> consulterParPrénom(String prenom){
+		ArrayList<Document> listeDoc = new ArrayList<>();
+		for(Document doc : collection.keySet()){
+			if(doc.getPrenomAuteur() == prenom){
+				listeDoc.add(doc);
+			}
+		}
+		return  listeDoc;
+	}
+
+	public ArrayList<Document> consulter(String nom, String prenom){
+		ArrayList<Document> listeDoc = new ArrayList<>();
+		for(Document doc : collection.keySet()){
+			if(doc.getPrenomAuteur() == prenom && doc.getNomAuteur() == nom){
+				listeDoc.add(doc);
+			}
+		}
+		return  listeDoc;
+	}
+
     public boolean ajouterDocument(Document doc,Integer nbExemplaire) {//moi
     	if(!collection.containsKey(doc)) {//if the Bibliotheque doesn t contain the doc
     		collection.put(doc,nbExemplaire);

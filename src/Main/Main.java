@@ -11,7 +11,7 @@ public class Main {
         Livre livreEconomie = new Livre("Economie", 314, "Polytech", "Henriot","Marie Christine", a, "ERF4324", 25,"ER3RFAZ");
         Livre livrePhilosophie = new Livre("Philo", 14, "Polytech", "Aristote","INCONNU", a, "ERF24", 25,"ER3RF");
         Bibliotheque Paris = new Bibliotheque("Cristaline", "Saint-Yorre");
-        Paris.ajouterDocument(livreEconomie);
+        //Paris.ajouterDocument(livreEconomie);
         //Paris.ajouterDocument(livrePhilosophie);
 
         Client Sam = new Client("Sam", "ET3");
