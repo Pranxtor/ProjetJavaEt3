@@ -29,6 +29,7 @@ public class Bibliotheque {
     	return true;
     }
     
+    //oui
     public boolean emprunter(Document doc) {
     	boolean emprunt ;
     	if(collection.contains(doc)) {

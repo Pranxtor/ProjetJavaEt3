@@ -23,6 +23,7 @@ public abstract class Document {
         this.nbExemplaire = nombreExemplaire;
     }
 
+    //oui
     public String getEAN(){
         return this.EAN;
     }
