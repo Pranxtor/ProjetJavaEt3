@@ -35,22 +35,26 @@ public class Bibliotheque {
    
    public Livre rechercheISBN(String EAN) {
 	   if (searchISBN.containsKey(EAN)) {
-		   return searchEAN.get(EAN);
+		   return searchISBN.get(EAN);
 	   }
 	   else
 		   return	null;
     }
     
-    public boolean ajouterDocument(Document doc,Integer nbExemplaire) {
-    	if(!collection.containsKey(doc)) {//if the Bibliotheque doesn't contain the doc
+    public boolean ajouterDocument(Document doc,Integer nbExemplaire) {//moi
+    	if(!collection.containsKey(doc)) {//if the Bibliotheque doesn t contain the doc
     		collection.put(doc,nbExemplaire);
         	if(doc instanceof Livre)//if doc is a Livre
         		searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);
         	if(doc.getEAN()!=null)//if doc have an EAN
         		searchEAN.put(doc.getEAN(), doc);
     	}
-    	else//if the Bibliotheque contains the doc
-    		doc.augmenterQuantite();
+    	else{//if the Bibliotheque contains the doc
+    		for(int i = 0 ; i<nbExemplaire; i++) {
+    			doc.augmenterQuantite();
+    		}
+    		collection.replace(doc,collection.get(doc)+nbExemplaire);
+    	}
     	return true;
     }
 
@@ -66,23 +70,26 @@ public class Bibliotheque {
 	}
 
     public boolean emprunter(Document doc) {
-    	boolean emprunt ;
-    	if(collection.containsKey(doc)) {
-    		emprunt = doc.diminuerQuantite();
-    		return true;
+    	if(collection.containsKey(doc)) {//if the Bibliotheque contains the doc
+    		if(collection.get(doc)>0) {//if there is no doc available in the Bibliotheque
+    			collection.replace(doc,collection.get(doc)-1);
+    			return true;
+    		}
+    		else {//if the Bibliotheque doesn t contain the doc
+        		return false;
+    		}
     	}
     	else
     		return false;
     }
     
     public boolean rendre(Document doc) {
-    	boolean retour ;
-    	if(collection.containsKey(doc)) {
-    		retour = doc.augmenterQuantite();
+    	if(collection.containsKey(doc)) {//if the Bibliotheque contains the doc
+    		collection.replace(doc,collection.get(doc)+1);
+    		return true;
     	}
-    	else
-    		retour = false;
-    	return retour;
+    	else//if the Bibliotheque doesn t contain the doc
+    		return false;
     }
     
     public ArrayList<Document> consulterToutDoc() {
