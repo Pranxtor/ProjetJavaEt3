@@ -29,13 +29,13 @@ public class Bibliotheque {
     	return true;
     }
     
-    public boolean emprunter() {
-    	boolean emprunt = Document.diminuerQuantite();
+    public boolean emprunter(Document doc) {
+    	boolean emprunt = doc.diminuerQuantite();
     	return emprunt;
     }
     
-    public boolean rendre() {
-    	boolean retour = Document.augmenterQuantite();
+    public boolean rendre(Document doc) {
+    	boolean retour = doc.augmenterQuantite();
     	return retour;
     }
     
