@@ -11,8 +11,9 @@ public class Bibliotheque {
 
     private String nom;
     private String adresse;
-    private HashSet<Document> collection;
+    private HashMap<Document,Integer> collection;//document,nombre d'exemplaire
     private HashMap<String, Livre> searchISBN;
+    private HashMap<String, Document> searchEAN;
     private HashSet<Client> clients;
 
     private static HashSet<Bibliotheque> reseauBibliotheque;
@@ -20,24 +21,48 @@ public class Bibliotheque {
     public Bibliotheque(String nom, String adresse){
         this.nom = nom;
         this.adresse = adresse;
-        collection = new HashSet<>();
+        collection = new HashMap<>();
         searchISBN = new HashMap<>();
     }
     
-    public boolean ajouterDocument(Document doc) {
-    	collection.add(doc);
+   public Document rechercheEAN(String EAN) {
+	   if (searchEAN.containsKey(EAN)) {
+		   return searchEAN.get(EAN);
+	   }
+	   else
+		   return	null;
+    }
+   
+   public Livre rechercheISBN(String EAN) {
+	   if (searchISBN.containsKey(EAN)) {
+		   return searchEAN.get(EAN);
+	   }
+	   else
+		   return	null;
+    }
+    
+    public boolean ajouterDocument(Document doc,Integer nbExemplaire) {
+    	if(!collection.containsKey(doc)) {//if the Bibliotheque doesn't contain the doc
+    		collection.put(doc,nbExemplaire);
+        	if(doc instanceof Livre)//if doc is a Livre
+        		searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);
+        	if(doc.getEAN()!=null)//if doc have an EAN
+        		searchEAN.put(doc.getEAN(), doc);
+    	}
+    	else//if the Bibliotheque contains the doc
+    		doc.augmenterQuantite();
     	return true;
     }
     
-    //oui
+
     public boolean emprunter(Document doc) {
     	boolean emprunt ;
-    	if(collection.contains(doc)) {
+    	if(collection.containsKey(doc)) {
     		emprunt = doc.diminuerQuantite();
+    		return true;
     	}
     	else
-    		emprunt = false;
-    	return emprunt;
+    		return false;
     }
     
     public boolean rendre(Document doc) {
