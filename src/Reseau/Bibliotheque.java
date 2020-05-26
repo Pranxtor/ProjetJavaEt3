@@ -72,6 +72,10 @@ public class Bibliotheque {
 		}
 		return listeDoc;
 	}
+	
+	/*public ArrayList<Document> consulterSerie(String titre){
+		
+	}*/
 
 	public static ArrayList<Document> consulterReseau(String nom){
     	ArrayList<Document> listDoc = new ArrayList<>();

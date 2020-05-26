@@ -11,19 +11,32 @@ public abstract class Document {
     private String EAN;
     private Date datePublication;
     private int nbExemplaire;
+    private Integer numeroSerie;//numero dans la serie
 
-    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, int nombreExemplaire){
+    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, int nombreExemplaire){
         this.titre = titre;
         this.numNotice = numNotice;
         this.editeur = editeur;
         this.nomAuteur = nomAuteur;
         this.prenomAuteur = prenomAuteur;
         this.datePublication = datePublication;
-        this.EAN = EAN;
         this.nbExemplaire = nombreExemplaire;
     }
-
-    //oui
+    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, int nombreExemplaire){
+    	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
+    	this.EAN = EAN;
+    }
+    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire){
+    	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
+    	this.numeroSerie =numeroSerie;
+    }
+    
+    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire){
+    	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
+    	this.numeroSerie = numeroSerie;
+    	this.EAN = EAN;
+    }
+   
     public String getEAN(){
         return this.EAN;
     }
