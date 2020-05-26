@@ -12,6 +12,11 @@ public class Client {
 
     // Inscription (non fait)
     public boolean inscrire(Bibliotheque nom){
-        return true;
+        //if(/*si le client n'est pas dans la liste de client dans la bibliothèque*/){
+            // ajouter une fonction pour ajouter à la liste de la bibliothèque le nom du client
+            return true;
+        //}
+        //return false;
     }
+
 }

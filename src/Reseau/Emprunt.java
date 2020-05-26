@@ -21,6 +21,7 @@ public class Emprunt {
         if(listeEmprunt.size() < nbLivreMax) {
             //if(/* fonction pour savoir si le document est présent dans la bibliotheque*/){
                 listeEmprunt.add(document);
+                // Fonction pour diminuer de 1 la quantité de ce document dans la bibliothèque
                 return true;
             //}
         }else{
@@ -29,11 +30,11 @@ public class Emprunt {
     }
 
     public boolean rendre(Document document){
-        if(listeEmprunt.isEmpty()){
-            return false;
-        }else if(listeEmprunt.contains(document)){
+        if(listeEmprunt.contains(document)){
+            // ajouter le document dans la bibliothèque
             return true;
         }
+        System.out.println("Vous n'avez pas emprunté ce document");
         return false;
     }
 
