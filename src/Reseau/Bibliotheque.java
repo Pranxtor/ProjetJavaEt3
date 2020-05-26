@@ -42,7 +42,7 @@ public class Bibliotheque {
 		   return	null;
     }
 
-    public ArrayList<Document> consulterParNom(String nom){
+    public ArrayList<Document> consulter(String nom){
 		ArrayList<Document> listeDoc = new ArrayList<>();
 		for(Document doc : collection.keySet()){
 			if(doc.getNomAuteur() == nom){
@@ -52,7 +52,7 @@ public class Bibliotheque {
 		return  listeDoc;
 	}
 
-	public ArrayList<Document> consulterParPrénom(String prenom){
+	public ArrayList<Document> consulterPrenom(String prenom){
 		ArrayList<Document> listeDoc = new ArrayList<>();
 		for(Document doc : collection.keySet()){
 			if(doc.getPrenomAuteur() == prenom){
