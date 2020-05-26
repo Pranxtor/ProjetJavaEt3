@@ -19,9 +19,9 @@ public class Emprunt {
 
     public boolean emprunter(Document document){
         if(listeEmprunt.size() < nbLivreMax) {
-            //if(/* fonction pour savoir si le document est présent dans la bibliotheque*/){
+            //if(/*Si le document se trouve dans la bibliothèque*/){
                 listeEmprunt.add(document);
-                // Fonction pour diminuer de 1 la quantité de ce document dans la bibliothèque
+                bibliotheque.emprunter(document);
                 return true;
             //}
         }else{
@@ -31,7 +31,7 @@ public class Emprunt {
 
     public boolean rendre(Document document){
         if(listeEmprunt.contains(document)){
-            // ajouter le document dans la bibliothèque
+            bibliotheque.rendre(document);
             return true;
         }
         System.out.println("Vous n'avez pas emprunté ce document");
