@@ -54,4 +54,17 @@ public abstract class Document {
     public int getNbExemplaire(){
         return this.nbExemplaire;
     }
+
+    public boolean diminuerQuantite(){
+        if(nbExemplaire > 0){
+            nbExemplaire = nbExemplaire - 1;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean augmenterQuantite(){
+        nbExemplaire = nbExemplaire + 1;
+        return true;
+    }
 }
