@@ -53,7 +53,17 @@ public class Bibliotheque {
     		doc.augmenterQuantite();
     	return true;
     }
-    
+
+    public boolean ajouterClient(Client nouveau){
+    	boolean dedans;
+    	if(clients.contains(nouveau)){
+			clients.add(nouveau);
+    		dedans = true;
+		}
+    	else
+			dedans = false;
+    	return dedans;
+	}
 
     public boolean emprunter(Document doc) {
     	boolean emprunt ;
@@ -67,7 +77,7 @@ public class Bibliotheque {
     
     public boolean rendre(Document doc) {
     	boolean retour ;
-    	if(collection.contains(doc)) {
+    	if(collection.containsKey(doc)) {
     		retour = doc.augmenterQuantite();
     	}
     	else
@@ -77,7 +87,7 @@ public class Bibliotheque {
     
     public ArrayList<Document> consulterToutDoc() {
     	ArrayList<Document> docs= new ArrayList<Document>();
-    	for(Document doc : collection) {
+    	for(Document doc : collection.keySet()) {
     		docs.add(doc);
     	}
     	return docs;

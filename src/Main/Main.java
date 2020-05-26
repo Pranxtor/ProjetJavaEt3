@@ -18,7 +18,5 @@ public class Main {
         Emprunt entreSam = new Emprunt(23,Sam,Paris);
         entreSam.emprunter(livrePhilosophie);
         System.out.println(Paris.consulterToutDoc());
-
-
     }
 }
