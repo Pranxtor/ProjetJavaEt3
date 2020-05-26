@@ -30,12 +30,22 @@ public class Bibliotheque {
     }
     
     public boolean emprunter(Document doc) {
-    	boolean emprunt = doc.diminuerQuantite();
+    	boolean emprunt ;
+    	if(collection.contains(doc)) {
+    		emprunt = doc.diminuerQuantite();
+    	}
+    	else
+    		emprunt = false;
     	return emprunt;
     }
     
     public boolean rendre(Document doc) {
-    	boolean retour = doc.augmenterQuantite();
+    	boolean retour ;
+    	if(collection.contains(doc)) {
+    		retour = doc.augmenterQuantite();
+    	}
+    	else
+    		retour = false;
     	return retour;
     }
     
