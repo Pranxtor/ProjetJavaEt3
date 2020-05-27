@@ -21,7 +21,7 @@ public class Client {
     /**
      * Methode qui permet d'inscrire le client a une bibliotheque
      * @param nom nom de la bibliotheque
-     * @return
+     * @return true si l'inscription est faite, false sinon
      */
     public boolean inscrire(Bibliotheque nom){
         return nom.ajouterClient(this);

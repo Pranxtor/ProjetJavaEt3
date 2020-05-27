@@ -14,7 +14,16 @@ public abstract class Document{
     private Integer numeroSerie;//numero dans la serie
     private Serie serie;
 
-    // Constructeur qui ne prend en compte ni l'EAN ni le numero de série
+    /**
+     * Constructeur qui ne prend en compte ni l'EAN ni le numero de série
+     * @param titre titre du document
+     * @param numNotice
+     * @param editeur
+     * @param nomAuteur
+     * @param prenomAuteur
+     * @param datePublication
+     * @param nombreExemplaire
+     */
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, int nombreExemplaire){
         this.titre = titre;
         this.numNotice = numNotice;

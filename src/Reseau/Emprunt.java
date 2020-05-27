@@ -10,6 +10,12 @@ public class Emprunt {
     private Client client;
     private Bibliotheque bibliotheque;
 
+    /**
+     * Constructeur
+     * @param nombreLivreMax nombre de livre maximum accorde au client
+     * @param client le client qui profite de l'emprunt
+     * @param bibliotheque bibliotheque qui prete le document
+     */
     public Emprunt(int nombreLivreMax, Client client, Bibliotheque bibliotheque){
         if(!client.estInscrit(bibliotheque)){
             bibliotheque.ajouterClient(client);
@@ -21,6 +27,11 @@ public class Emprunt {
         this.bibliotheque = bibliotheque;
     }
 
+    /**
+     * Methode qui permet d'emprunter un document
+     * @param document le document que le client veut emprunter
+     * @return true si l'emprunt a ete fait, false sinon
+     */
     public boolean emprunter(Document document){
         if(listeEmprunt.size() < nbLivreMax && bibliotheque.emprunter(document)) {
             listeEmprunt.add(document);
@@ -31,6 +42,11 @@ public class Emprunt {
         return false;
     }
 
+    /**
+     * Methode qui permet de rendre un document
+     * @param document le document que le client veut rendre
+     * @return true si le rendu a ete fait, false sinon
+     */
     public boolean rendre(Document document){
         if(listeEmprunt.contains(document)){
             bibliotheque.rendre(document);
