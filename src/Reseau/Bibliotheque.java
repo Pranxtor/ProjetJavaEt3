@@ -100,30 +100,61 @@ public class Bibliotheque {
 
 	// Renvoie le nombre de documents de chaque type publiés entre deux dates
 	public ArrayList<ArrayList<String>> filtreperiode(Date debut, Date fin){
+
 		ArrayList<ArrayList<String>> listTypeDoc = new ArrayList<>();
 		ArrayList<String> typeDoc = new ArrayList<>();
-		boolean estDedans = true;
 
-		for(Document doc : collection.keySet()){ // On parcourt tous les documents
-			if(doc.getDatePublication().after(debut) && doc.getDatePublication().before(fin)){ // Si on est compris dans la période
+		boolean estDedans = false;
 
-				for(ArrayList<String> type : listTypeDoc){ // En parcourant la liste de type de documents déjà connu
-					if(!type.contains(doc.getClass().toString())){ // Si le type de documents n'est pas déjà dans la liste de type de document
-						estDedans = false;
+		if(collection.isEmpty()){   // Si la collection est vide, ne rien faire
+			System.out.println("Votre collection est vide");
+		}else{						// Si la collection n'est pas vide
+			typeDoc.add(collection.get(0).getClass().toString());  // On inplémente une partie
+			typeDoc.add(Integer.toString(0));
+			listTypeDoc.add(typeDoc);
 
-					}else{ // Si le type de documents est déjà dans la liste de type de document
-						type.set(1,Integer.toString(Integer.parseInt(type.get(1))+1) );
-						estDedans = true;
+			for(Document doc : collection.keySet()){ // On parcourt tous les documents
+				if(doc.getDatePublication().after(debut) && doc.getDatePublication().before(fin)){ // Si on est compris dans la période
+
+					for(ArrayList<String> type : listTypeDoc){ // En parcourant la liste de type de documents déjà connu
+						if(type.contains(doc.getClass().toString())){ // Si le type de documents est déjà dans la liste de type de document
+							type.set(1, Integer.toString(Integer.parseInt(type.get(1))+1));
+							estDedans = true;
+						}
 					}
-				}
-
-				if(!estDedans){ // Si le type de documents n'est pas déjà dans la liste de type de document
-					// TODO ajouter le type dans la liste listTypeDoc avec un nombre de 1 (en string)
+					if(!estDedans){  // Si on a parcouru toute la liste de types de documents déjà connu mais que le type n'est pas connu
+						typeDoc =(ArrayList<String>) typeDoc.clone();
+						typeDoc.set(0, doc.getClass().toString());
+						typeDoc.set(1, Integer.toString(1));
+						listTypeDoc.add(typeDoc);
+					}
+					estDedans = false;
 				}
 			}
 		}
 		return listTypeDoc;
 	}
+
+	public static ArrayList<ArrayList<String>> filtreperiodeReseau(Date debut, Date fin){
+		ArrayList<ArrayList<String>> filtre = new ArrayList<>();
+		ArrayList<ArrayList<String>> intermédiaire = new ArrayList<>();
+		boolean estDedans = false;
+		for(Bibliotheque biblio : reseauBibliotheque){
+			intermédiaire = biblio.filtreperiode(debut, fin);
+			for(ArrayList<String> tab : intermédiaire){
+				if(){
+
+				}
+			}
+			if(!estDedans){
+
+			}
+		}
+
+    	return filtre;
+	}
+
+
 
 	public static ArrayList<Document> consulterReseau(String nom){
     	ArrayList<Document> listDoc = new ArrayList<>();
@@ -274,10 +305,6 @@ public class Bibliotheque {
 			return false;
 		return true;
 	}
-    
-    
-
-
 
 
 }
