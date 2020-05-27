@@ -138,19 +138,24 @@ public class Bibliotheque {
 	public static ArrayList<ArrayList<String>> filtreperiodeReseau(Date debut, Date fin){
 		ArrayList<ArrayList<String>> filtre = new ArrayList<>();
 		ArrayList<ArrayList<String>> intermédiaire = new ArrayList<>();
+		ArrayList<String> inter = new ArrayList<>();
 		boolean estDedans = false;
-		for(Bibliotheque biblio : reseauBibliotheque){
+
+		for(Bibliotheque biblio : reseauBibliotheque){ // Dans tout le réseau
 			intermédiaire = biblio.filtreperiode(debut, fin);
-			for(ArrayList<String> tab : intermédiaire){
-				if(){
-
+			for(ArrayList<String> tab : intermédiaire){ // Dans chaque bibliothèque
+				for(ArrayList<String> final_tab : filtre){
+					if(final_tab.contains(tab.get(0))){ // Si le filtre contient déjà le type de document
+						final_tab.set(filtre.indexOf(tab), Integer.toString(Integer.parseInt(tab.get(1)) + Integer.parseInt(final_tab.get(1))) );
+						estDedans = true;
+					}
 				}
-			}
-			if(!estDedans){
-
+				if(!estDedans){  // Sinon
+					filtre.add((ArrayList<String>) tab.clone());
+				}
+				estDedans = false;
 			}
 		}
-
     	return filtre;
 	}
 
