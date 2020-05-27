@@ -27,7 +27,6 @@ public class Livre extends Document{
     }
 
 
-
     // Constructeur qui prenant en compte l'ISBN
     // Constructeur qui ne prend en compte ni l'EAN ni le numero de série
     public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, int nombreExemplaire, String ISBN){

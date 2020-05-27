@@ -75,12 +75,15 @@ public class Bibliotheque {
 		return listeDoc;
 	}
 
-/*
+
 	// Renvoie les documents d'une série triés par date de publication
 	public ArrayList<Document> consulterSerie(String titre){
-		
+		ArrayList<Document> serie = new ArrayList<>();
+
+
+		return serie;
 	}
- */
+
 
 	// Renvoie le nombre de documents de chaque type publiés entre deux dates
 	public ArrayList<ArrayList<String>> filtreperiode(Date debut, Date fin){
