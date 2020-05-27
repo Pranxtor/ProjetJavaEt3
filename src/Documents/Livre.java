@@ -17,13 +17,13 @@ public class Livre extends Document{
     }
 
     // Constructeur qui prend en compte le numero de série mais pas l'EAN
-    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire){
-        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, numeroSerie, nombreExemplaire);
+    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire, Serie serie){
+        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, numeroSerie, nombreExemplaire,serie);
     }
 
     // Constructeur qui prend tout en compte
-    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire){
-        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, EAN, numeroSerie, nombreExemplaire);
+    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire, Serie serie){
+        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, EAN, numeroSerie, nombreExemplaire,serie);
     }
 
 
@@ -41,18 +41,16 @@ public class Livre extends Document{
     }
 
     // Constructeur qui prend en compte le numero de série mais pas l'EAN
-    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire, String ISBN){
-        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, numeroSerie, nombreExemplaire);
+    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire, String ISBN,Serie serie){
+        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, numeroSerie, nombreExemplaire,serie);
         this.ISBN = ISBN;
     }
 
     // Constructeur qui prend tout en compte
-    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire, String ISBN){
-        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, EAN, numeroSerie, nombreExemplaire);
+    public Livre(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire, String ISBN, Serie serie){
+        super(titre, numNotice, editeur, nomAuteur, prenomAuteur, datePublication, EAN, numeroSerie, nombreExemplaire,serie);
         this.ISBN = ISBN;
     }
-
-
 
     public String getISBN(){
         return this.ISBN;

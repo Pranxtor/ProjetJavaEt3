@@ -2,7 +2,7 @@ package Documents;
 
 import java.util.Date;
 
-public abstract class Document {
+public abstract class Document{
     private String titre;
     private int numNotice;
     private String editeur;
@@ -12,6 +12,7 @@ public abstract class Document {
     private Date datePublication;
     private int nbExemplaire;
     private Integer numeroSerie;//numero dans la serie
+    private Serie serie;
 
     // Constructeur qui ne prend en compte ni l'EAN ni le numero de série
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, int nombreExemplaire){
@@ -31,15 +32,17 @@ public abstract class Document {
     }
 
     // Constructeur qui prend en compte le numero de série mais pas l'EAN
-    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire){
+    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire,Serie  serie){
     	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
-    	this.numeroSerie =numeroSerie;
+    	this.numeroSerie = numeroSerie;
+    	this.serie=serie;
     }
 
     // Constructeur qui prend tout en compte
-    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire){
+    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire,Serie  serie){
     	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
     	this.numeroSerie = numeroSerie;
+    	this.serie=serie;
     	this.EAN = EAN;
     }
 
@@ -73,6 +76,10 @@ public abstract class Document {
 
     public int getNbExemplaire(){
         return this.nbExemplaire;
+    }
+    
+    public Serie getSerie(){
+        return this.serie;
     }
 
     public boolean diminuerQuantite(){
@@ -108,6 +115,10 @@ public abstract class Document {
 		if (numNotice != other.numNotice)
 			return false;
 		return true;
+	}
+	
+	public int compareTo(Document doc) {
+		return this.numeroSerie.compareTo(doc.numeroSerie);
 	}
 
     @Override

@@ -5,6 +5,7 @@ import Documents.Livre;
 
 import javax.print.Doc;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -79,8 +80,20 @@ public class Bibliotheque {
 	// Renvoie les documents d'une série triés par date de publication
 	public ArrayList<Document> consulterSerie(String titre){
 		ArrayList<Document> serie = new ArrayList<>();
-
-
+		for(Document doc : collection.keySet()){
+			if(doc.getSerie().getTitre().contentEquals(titre) ){
+				serie.add(doc);
+			}
+		}
+		
+		Comparator<Document> comp = new Comparator<Document>(){ 
+		  public int compare(Document a, Document b) 
+		    { 
+			  return a.compareTo(b);
+		    } 
+		 };
+		java.util.Collections.sort(serie, comp);
+		
 		return serie;
 	}
 

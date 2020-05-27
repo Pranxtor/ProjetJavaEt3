@@ -7,9 +7,12 @@ public class Serie {
     private ArrayList<Document> serie;
 
     // constructeur
-    public Serie(String titre, Integer numero){
+    public Serie(String titre){
         this.titre = titre;
     }
-
+    
+    public String getTitre() {
+    	return titre;
+    }
 
 }
