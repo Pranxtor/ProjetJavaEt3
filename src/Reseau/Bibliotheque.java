@@ -19,7 +19,7 @@ public class Bibliotheque {
     private HashMap<String, Document> searchEAN;
     private HashSet<Client> clients;
 
-    private static HashSet<Bibliotheque> reseauBibliotheque;
+    private static HashSet<Bibliotheque> reseauBibliotheque = new HashSet<>();
 
 	/**
 	 * Constructeur
@@ -33,7 +33,12 @@ public class Bibliotheque {
         searchISBN = new HashMap<>();
         searchEAN = new HashMap<>();
         clients = new HashSet<>();
+        reseauBibliotheque.add(this);
     }
+
+    public static void afficheReseau(){
+		System.out.println(reseauBibliotheque.toString());
+	}
 
 	/**
 	 * Methode qui permet de rechercher a partir de l'EAN
