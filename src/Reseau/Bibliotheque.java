@@ -97,6 +97,20 @@ public class Bibliotheque {
 		return serie;
 	}
 
+	public ArrayList<Document> consulterSerieReseau(String titre){
+    	ArrayList<Document> serie = new ArrayList<>();
+		ArrayList<Document> intermediaire = new ArrayList<>();
+
+    	for(Bibliotheque biblio : reseauBibliotheque){
+    		intermediaire = biblio.consulterSerie(titre);
+    		for(Document i : intermediaire){
+    			if(!serie.contains(i)){
+    				serie.add(i);
+				}
+			}
+		}
+    	return serie;
+	}
 
 	// Renvoie le nombre de documents de chaque type publiés entre deux dates
 	public ArrayList<ArrayList<String>> filtreperiode(Date debut, Date fin){
@@ -158,8 +172,6 @@ public class Bibliotheque {
 		}
     	return filtre;
 	}
-
-
 
 	public static ArrayList<Document> consulterReseau(String nom){
     	ArrayList<Document> listDoc = new ArrayList<>();
