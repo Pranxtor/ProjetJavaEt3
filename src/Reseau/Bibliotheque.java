@@ -407,9 +407,9 @@ public class Bibliotheque {
 	}
 
 	/**
-	 * Methode qui permet
-	 * @param obj
-	 * @return
+	 * Methode qui permet de redefinir l'egalite
+	 * @param obj objet avec lequel on compare
+	 * @return true si l'objet est egal ou bien si c'est le meme, false sinon
 	 */
 	@Override
 	public boolean equals(Object obj) {
