@@ -64,16 +64,16 @@ public class Main {
 
 		            System.out.println("Choisissez parmi ces options. Appuyez sur votre touche 1, 2, ... ou 9");
 
-		            System.out.println("1. Ajouter une nouvelle bibliotheque"); // ok
-		            System.out.println("2. Ajouter un nouveau document dans le reseau"); // OK
-		            System.out.println("3. Ajouter un nouvel utilisateur"); // ok
-		            System.out.println("4. Consulter tous les documents");  // ok
-		            System.out.println("5. Consulter les documents d'une serie"); // ok
-		            System.out.println("6. Consulter les documents d'un auteur"); // ok
-		            System.out.println("7. Rechercher un livre par son ISBN");    // ok
-		            System.out.println("8. Rechercher un document par son EAN");  // ok
-		            System.out.println("9. Consulter le nombre de documents publies sur une periode"); // OK
-		            System.out.println("10. Emprunter ou rendre un document pour un client"); // ok
+		            System.out.println("1. Ajouter une nouvelle bibliotheque"); 
+		            System.out.println("2. Ajouter un nouveau document dans le reseau");
+		            System.out.println("3. Ajouter un nouvel utilisateur");
+		            System.out.println("4. Consulter tous les documents");
+		            System.out.println("5. Consulter les documents d'une serie");
+		            System.out.println("6. Consulter les documents d'un auteur");
+		            System.out.println("7. Rechercher un livre par son ISBN");
+		            System.out.println("8. Rechercher un document par son EAN");
+		            System.out.println("9. Consulter le nombre de documents publies sur une periode");
+		            System.out.println("10. Emprunter ou rendre un document pour un client");
 		            System.out.println("11. Echange de document entre deux bibliotheques");
 
 		            try{
@@ -135,9 +135,14 @@ public class Main {
 								System.out.println("Quel est le prenom de l'auteur");
 								prenom = in.nextLine();
 
-								System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
-								debut = in.nextLine();
-								serie = new Serie("AB");
+								do{
+									System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
+									debut = in.nextLine();
+								}while (Integer.parseInt(debut)< 0 || Integer.parseInt(debut)>2022);
+
+								System.out.println("Quel est le titre de la serie");
+								fin = in.nextLine();
+								serie = new Serie(fin);
 
 								System.out.println("Quel est son EAN");
 								EAN = in.nextLine();
@@ -381,14 +386,13 @@ public class Main {
 		                    System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
 		                    bibliotheque = in.next();
 		                    try{
-		                    	try{
-									rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN).afficheDoc();
-								}catch (NullPointerException x){
-		                    		System.out.println("Il n'y a pas de document associe");
-								}
+		                    	rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN).afficheDoc();
+
 		                    }catch (ExceptionBibliothequeDoesNotExist e){
 		                        System.out.println(e.getMessage());
-		                    }
+		                    }catch (ExceptionDocumentDoesntExist e){
+								System.out.println(e.getMessage());
+							}
 		                    break;
 
 		                case 8:
@@ -398,15 +402,12 @@ public class Main {
 		                    System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
 		                    bibliotheque = in.next();
 		                    try{
-		                    	try{
-									rechercheBibliotheque(bibliotheque).rechercheEAN(EAN).afficheDoc();
-								}catch (NullPointerException x){
-									System.out.println(rechercheBibliotheque(bibliotheque).searchEAN);
-		                    		System.out.println("Il n'y a pas de document associe");
-								}
+		                    	rechercheBibliotheque(bibliotheque).rechercheEAN(EAN).afficheDoc();
 		                    }catch (ExceptionBibliothequeDoesNotExist e){
 		                        System.out.println(e.getMessage());
-		                    }
+							}catch (ExceptionDocumentDoesntExist e){
+								System.out.println(e.getMessage());
+							}
 		                    break;
 
 		                case 9:
@@ -484,6 +485,7 @@ public class Main {
 											for(Emprunt k : emprunts){
 												if(k.getClient().equals(client) && k.getBibliotheque().equals(rechercheBibliotheque(bibliotheque))){
 													k.emprunter(rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN));
+
 												}
 											}
 										}else if(selection == 2){
@@ -523,6 +525,8 @@ public class Main {
 								}
 							}catch (ExceptionBibliothequeDoesNotExist e){
 								System.out.println(e.getMessage());
+							}catch (ExceptionDocumentDoesntExist e){
+								System.out.println(e.getMessage());
 							}
 		                    break;
 						case 11:
@@ -553,6 +557,8 @@ public class Main {
 									System.out.println("Retour au menu");
 								}
 							}catch (ExceptionBibliothequeDoesNotExist e){
+								System.out.println(e.getMessage());
+							}catch (ExceptionDocumentDoesntExist e){
 								System.out.println(e.getMessage());
 							}
 							break;

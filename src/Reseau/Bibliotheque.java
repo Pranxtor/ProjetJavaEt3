@@ -69,13 +69,13 @@ public class Bibliotheque {
 	 * @return Le document associe a l'EAN
 	 * @throws ExceptionDocumentDoesntExist
 	 */
-	public Document rechercheEAN(String EAN) {
+	public Document rechercheEAN(String EAN) throws ExceptionDocumentDoesntExist {
 	   if (searchEAN.containsKey(EAN)) {
 		   return searchEAN.get(EAN);
 	   }
 	   else{
-	   		//throw new ExceptionDocumentDoesntExist();
-		   return	null;
+	   		throw new ExceptionDocumentDoesntExist();
+		   //return	null;
 	   }
 
     }
@@ -86,13 +86,13 @@ public class Bibliotheque {
 	 * @return Le document associe a l'ISBN, null s'il n'est pas associe a un document
 	 * @throws ExceptionDocumentDoesntExist
 	 */
-	public Livre rechercheISBN(String ISBN) {
+	public Livre rechercheISBN(String ISBN) throws ExceptionDocumentDoesntExist {
 	   if (searchISBN.containsKey(ISBN)) {
 		   return searchISBN.get(ISBN);
 	   }
 	   else {
-		   //throw new ExceptionDocumentDoesntExist();
-		   return	null;
+		   throw new ExceptionDocumentDoesntExist();
+		   //return	null;
 	   }
     }
 
