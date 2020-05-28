@@ -46,18 +46,18 @@ public class Main {
     	int i = 0;
     	int j = 0;
     	
-    	//if(args.length > 0)
-		//{
-			//java.io.File tempFile = new java.io.File(args[0]);
+    	if(args.length > 0)
+		{
+			java.io.File tempFile = new java.io.File(args[0]);
 			
-			//if(tempFile.exists())
-			//{
-				//System.out.println("[Main] Reading the file " + args[0] + " ...");
+			if(tempFile.exists())
+			{
+				System.out.println("[Main] Reading the file " + args[0] + " ...");
 						
 				//We start by reading the CSV file
-				//FileReader.getDataFromCSVFile(args[0],b,d);
+				FileReader.getDataFromCSVFile(args[0],b,d);
 				
-				//System.out.println("[Main] End of the file " + args[0] + ".");
+				System.out.println("[Main] End of the file " + args[0] + ".");
 				
 				do{
 		            java.util.Scanner in = new Scanner(System.in);
@@ -574,16 +574,16 @@ public class Main {
 		                System.out.println("Mauvaise selection. Recommencez !");
 		            }
 		        }while(true);
-			//}
-			//else
-			//{
-				//System.out.println("[Main] No file " + args[0]);
-			//}
-		//}
-		//else
-		//{
-			//System.out.println("[Main] You should enter the CSV file path as a parameter.");
-		//}
+			}
+			else
+			{
+				System.out.println("[Main] No file " + args[0]);
+			}
+		}
+		else
+		{
+			System.out.println("[Main] You should enter the CSV file path as a parameter.");
+		}
 
         
     }
