@@ -17,7 +17,7 @@ public class Bibliotheque {
     private String adresse;
     private HashMap<Document,Integer> collection;// document , nombre d'exemplaire
     private HashMap<String, Livre> searchISBN;
-    private HashMap<String, Document> searchEAN;
+    public HashMap<String, Document> searchEAN;
     private HashSet<Client> clients;
 
     private static HashSet<Bibliotheque> reseauBibliotheque = new HashSet<>();
@@ -372,14 +372,16 @@ public class Bibliotheque {
                 			if(!searchISBN.containsKey(livre.getISBN())) {//if this ISBN doesn t exist
                 				collection.put(livre,nbExemplaire);
                 				searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);//bd ...
-                    			collection.put(livre,nbExemplaire);
                 			}
                 			else //if this ISBN already exists
                 				return false;
                 		}
         			}
-    				else//if doc isn t a livre
+    				else{//if doc isn t a livre
     					collection.put(doc,nbExemplaire);
+    					searchEAN.put(doc.getEAN(), doc);
+    				}
+    					
     			}
     			else//if this EAN already exists
     				return false;
