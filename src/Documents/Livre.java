@@ -13,4 +13,23 @@ public class Livre extends Document{
     public String getISBN() {
     	return ISBN;
     }
+    
+    @Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Livre other = (Livre) obj;
+		if (this.getTitre() != other.getTitre())
+			return false;
+		if(this.getEAN()!=null&&other.getEAN()!=null)
+			if(this.getEAN() != other.getEAN())
+				return false;
+		if(this.getISBN() != other.getISBN())
+			return false;
+		return true;
+	}
 }

@@ -341,12 +341,46 @@ public class Bibliotheque {
 	 * @return true si l'ajout a ete fait, false sinon
 	 */
     public boolean ajouterDocument(Document doc,Integer nbExemplaire) {//moi
+    	Livre livre = null;
     	if(!collection.containsKey(doc)) {//if the Bibliotheque doesn t contain the doc
-    		collection.put(doc,nbExemplaire);
-        	if(doc instanceof Livre)//if doc is a Livre
-        		searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);
-        	if(doc.getEAN()!=null)//if doc have an EAN
-        		searchEAN.put(doc.getEAN(), doc);
+    		if(doc.getEAN()==null) {//if doc doesn t have an EAN
+    			if(doc instanceof Livre) {//if doc is a Livre
+    				livre = (Livre)doc;
+            		if(livre.getISBN()==null) {//if doc doesn t have an ISBN
+            			collection.put(doc,nbExemplaire);
+            		}
+            		else {
+            			if(!searchISBN.containsKey(livre.getISBN())) {//if this ISBN doesn t exist
+                			searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);//bd, carte etc
+            				collection.put(livre,nbExemplaire);
+            			}
+            			else //if this ISBN already exists
+            				return false;
+            		}
+    			}
+    		}
+    		else {//if doc has an EAN
+    			if(!searchEAN.containsKey(doc.getEAN())) {//if this EAN doesn t exist
+    				if(doc instanceof Livre) {//if doc is a Livre
+        				livre = (Livre)doc;
+                		if(livre.getISBN()==null) {//if doc doesn t have an ISBN
+                			searchEAN.put(doc.getEAN(), doc);
+                			collection.put(doc,nbExemplaire);
+                		}
+                		else {
+                			if(!searchISBN.containsKey(livre.getISBN())) {//if this ISBN doesn t exist
+                				collection.put(livre,nbExemplaire);
+                				searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);//bd ...
+                    			collection.put(livre,nbExemplaire);
+                			}
+                			else //if this ISBN already exists
+                				return false;
+                		}
+        			}
+    			}
+    			else//if this EAN already exists
+    				return false;
+    		}	
     	}
     	else{//if the Bibliotheque contains the doc
     		for(int i = 0 ; i<nbExemplaire; i++) {
