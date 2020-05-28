@@ -339,6 +339,7 @@ public class Bibliotheque {
 	 * @return true si l'ajout a ete fait, false sinon
 	 */
     public boolean ajouterDocument(Document doc,Integer nbExemplaire) {//moi
+    	System.out.println(doc);
     	Livre livre = null;
     	if(!collection.containsKey(doc)) {//if the Bibliotheque doesn t contain the doc
     		if(doc.getEAN()==null) {//if doc doesn t have an EAN
@@ -356,6 +357,8 @@ public class Bibliotheque {
             				return false;
             		}
     			}
+    			else//if doc isn t a livre
+    				collection.put(doc,nbExemplaire);
     		}
     		else {//if doc has an EAN
     			if(!searchEAN.containsKey(doc.getEAN())) {//if this EAN doesn t exist
@@ -375,6 +378,8 @@ public class Bibliotheque {
                 				return false;
                 		}
         			}
+    				else//if doc isn t a livre
+    					collection.put(doc,nbExemplaire);
     			}
     			else//if this EAN already exists
     				return false;
@@ -446,6 +451,8 @@ public class Bibliotheque {
 	 */
 	public ArrayList<Document> consulterToutDoc() {
     	ArrayList<Document> docs= new ArrayList<Document>();
+    	System.out.println(collection);
+    	
     	for(Document doc : collection.keySet()) {
     		docs.add(doc);
     	}
