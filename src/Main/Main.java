@@ -29,7 +29,7 @@ public class Main {
         String ISBN;
         String EAN;
         String bibliotheque;
-        String date="";
+        String date;
         String debut="";
         String fin="";
         Date dateDebut;
@@ -146,27 +146,19 @@ public class Main {
 								System.out.println("Quel est le prenom de l'auteur");
 								prenom = in.next();
 
-								System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
-								debut = in.next();
+								do {
+									System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
+									debut = in.next();
+								}while(Integer.parseInt(debut)<0000 && Integer.parseInt(debut)<1000);
+
 								serie = new Serie("AB");
-
-
 								System.out.println("Quel est son EAN");
 								EAN = in.next();
-								System.out.println(bibliotheque);
-								System.out.println(numeroSerie);
-								System.out.println(nombreExemplaire);
-								System.out.println(titre);
-								System.out.println(editeur);
-								System.out.println(nom);
-								System.out.println(prenom);
-								System.out.println(debut);
-
 
 								if(selection == 1){
 									System.out.println("Quel est son ISBN ?");
 									ISBN = in.next();
-									if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Livre(titre,editeur,nom,prenom,EAN, date ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
+									if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Livre(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
 										System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
 										System.out.println("Le document a ete ajoute");
 									}
@@ -261,12 +253,12 @@ public class Main {
 		                    System.out.println("Autre chiffre. Retour au menu");
 
 		                    selection = in.nextInt();
-							nom = in.nextLine();
-		                    System.out.println("Entrez son nom. Si vous ne le connaissez pas, appuyez sur entree");
-							prenom = in.nextLine();
-		                    System.out.println("Entrez son prenom. Si vous ne le connaissez pas, appuyez sur entree");
-
 		                    if(selection == 1){
+								System.out.println("Entrez son nom. Si vous ne le connaissez pas, appuyez sur entree");
+								nom = in.next();
+
+								System.out.println("Entrez son prenom. Si vous ne le connaissez pas, appuyez sur entree");
+								prenom = in.next();
 		                        if(nom.isEmpty() && !prenom.isEmpty()){
 									System.out.println(consulterPrenomReseau(prenom));
 		                        }else if(!nom.isEmpty() && prenom.isEmpty()){
@@ -278,6 +270,12 @@ public class Main {
 		                        }
 		                    }else if(selection == 2){
 		                        try{
+
+									System.out.println("Entrez son nom. Si vous ne le connaissez pas, appuyez sur entree");
+									nom = in.next();
+
+									System.out.println("Entrez son prenom. Si vous ne le connaissez pas, appuyez sur entree");
+									prenom = in.next();
 		                            System.out.println("Quel est le nom de la bibliotheque parmi cette liste");
 		                            afficheReseau();
 		                            bibliotheque = in.next();
@@ -305,7 +303,11 @@ public class Main {
 		                    System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
 		                    bibliotheque = in.next();
 		                    try{
-		                        rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN).afficheDoc();
+		                    	try{
+									rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN).afficheDoc();
+								}catch (NullPointerException x){
+		                    		System.out.println("Il n'y a pas de document associe");
+								}
 		                    }catch (ExceptionBibliothequeDoesNotExist e){
 		                        System.out.println(e.getMessage());
 		                    }
@@ -318,7 +320,12 @@ public class Main {
 		                    System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
 		                    bibliotheque = in.next();
 		                    try{
-		                        rechercheBibliotheque(bibliotheque).rechercheEAN(EAN).afficheDoc();
+		                    	try{
+									rechercheBibliotheque(bibliotheque).rechercheEAN(EAN).afficheDoc();
+								}catch (NullPointerException x){
+									System.out.println(rechercheBibliotheque(bibliotheque).searchEAN);
+		                    		System.out.println("Il n'y a pas de document associe");
+								}
 		                    }catch (ExceptionBibliothequeDoesNotExist e){
 		                        System.out.println(e.getMessage());
 		                    }
