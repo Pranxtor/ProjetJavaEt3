@@ -55,4 +55,10 @@ public class Livre extends Document{
     public String getISBN(){
         return this.ISBN;
     }
+
+    @Override
+    public void afficheDoc() {
+        super.afficheDoc();
+        System.out.println("ISBN : " + ISBN);
+    }
 }

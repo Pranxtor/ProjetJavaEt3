@@ -17,12 +17,12 @@ public abstract class Document{
     /**
      * Constructeur qui ne prend en compte ni l'EAN ni le numero de série
      * @param titre titre du document
-     * @param numNotice
-     * @param editeur
-     * @param nomAuteur
-     * @param prenomAuteur
-     * @param datePublication
-     * @param nombreExemplaire
+     * @param numNotice numero de notice
+     * @param editeur editeur du document
+     * @param nomAuteur nom de l'auteur
+     * @param prenomAuteur prenom de l'auteur
+     * @param datePublication date de publication de l'oeuvre
+     * @param nombreExemplaire nombre d'exemplaire dans la bibliotheque
      */
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, int nombreExemplaire){
         this.titre = titre;
@@ -35,6 +35,18 @@ public abstract class Document{
     }
 
     // Constructeur qui prend en compte l'EAN mais pas le numero de série
+
+    /**
+     * Constructeur qui prend en compte l'EAN mais pas le numero de serie
+     * @param titre titre du document
+     * @param numNotice numero de notice du document
+     * @param editeur editeur du document
+     * @param nomAuteur nom de l'auteur
+     * @param prenomAuteur prenom de l'auteur
+     * @param datePublication date de publication de l'oeuvre
+     * @param EAN EAN du document
+     * @param nombreExemplaire nombre d'exemplaire dans la bibliotheque
+     */
     public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, int nombreExemplaire){
     	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
     	this.EAN = EAN;
@@ -53,6 +65,15 @@ public abstract class Document{
     	this.numeroSerie = numeroSerie;
     	this.serie=serie;
     	this.EAN = EAN;
+    }
+
+    public void afficheDoc(){
+        System.out.println("Titre : " + titre);
+        System.out.println("Numero de notice : " + numNotice);
+        System.out.println("Editeur : " + editeur);
+        System.out.println("Auteur : " + nomAuteur + " " + prenomAuteur);
+        System.out.println("Date de publication : " + datePublication);
+        System.out.println("EAN : " + EAN);
     }
 
     public String getEAN(){

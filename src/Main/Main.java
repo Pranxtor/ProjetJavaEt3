@@ -16,12 +16,19 @@ import static Reseau.Bibliotheque.*;
 public class Main {
     public static void main(String[] args){
         int selection;
+        String titre;
         String nom;
         String prenom;
+        int numNotice;
+        int numeroSerie;
+        int nombreExemplaire;
+        String editeur;
+        Serie serie;
         String adresse;
         String ISBN;
         String EAN;
         String bibliotheque;
+        Date date;
         String debut;
         String fin;
         boolean fait;
@@ -35,10 +42,10 @@ public class Main {
             System.out.println("2. Ajouter un nouveau document dans le reseau"); // TODO
             System.out.println("3. Ajouter un nouvel utilisateur"); // ok
             System.out.println("4. Consulter tous les documents");  // ok
-            System.out.println("5. Consulter les documents d'une serie"); //
+            System.out.println("5. Consulter les documents d'une serie"); // TODO
             System.out.println("6. Consulter les documents d'un auteur"); // ok
-            System.out.println("7. Rechercher un livre par son ISBN");    // Creer une methode pour afficher le document
-            System.out.println("8. Rechercher un document par son EAN");  // Creer une methode pour afficher le document
+            System.out.println("7. Rechercher un livre par son ISBN");    // ok
+            System.out.println("8. Rechercher un document par son EAN");  // ok
             System.out.println("9. Consulter le nombre de documents publies sur une periode");  // TODO DATES !
             System.out.println("10. Emprunter ou rendre un document pour un client"); // TODO
 
@@ -58,9 +65,35 @@ public class Main {
                     break;
 
                 case 2:
+                    System.out.println("Si vous ne savez pas, appuyez sur entree directement");
                     System.out.println("Quel est le titre du documents ?");
-                    //Document doc = new Document();
-                    // J'attends d'avoir ton push pour le faire
+                    titre = in.next();
+                    System.out.println("Quel est le numero de notice ?");
+                    numNotice = in.nextInt();
+                    System.out.println("Qui est l'editeur ?");
+                    editeur = in.next();
+                    System.out.println("Quel est le nom de l'auteur");
+                    nom = in.next();
+                    System.out.println("Quel est le prenom de l'auteur");
+                    prenom = in.next();
+                    System.out.println("Quelle est la date de publication. Ecrivez sous la forme JJ/MM/AA");
+                    // TODO DATE DE PUBLICATION
+                    System.out.println("Quel est son EAN");
+                    EAN = in.next();
+
+                    System.out.println("Est-ce un livre ?");
+                    System.out.println("1. Oui");
+                    System.out.println("2. Non");
+                    selection = in.nextInt();
+                    if(selection == 1){
+                        System.out.println("Quel est son ISBN ?");
+                        ISBN = in.next();
+                        //Livre doc = new Livre(titre, numNotice,editeur,nom,prenom,date,EAN,numeroSerie,nombreExemplaire,ISBN,serie)
+                    }else{
+                        //Document doc = new Document(titre,numNotice,editeur,nom,prenom,date,EAN,numeroSerie,nombreExemplaire,serie);
+                    }
+
+
                     System.out.println("Dans quelle bibliotheque voulez vous ajouter votre document ?");
                     afficheReseau();
                     bibliotheque = in.next();
@@ -69,16 +102,20 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Entrer le nom de l'utilisateur");
+
+                    System.out.println("Entrer le nom du client");
                     nom = in.next();
                     System.out.println("Entrer le prenom");
                     prenom = in.next();
-                    Client client = new Client(nom, prenom);
-
                     System.out.println("Dans quel bibliotheque voulez vous l'inscrire parmi cette liste de bibliotheque ? \nEcirvez le nom de la bibliotheque");
                     afficheReseau();
                     bibliotheque = in.next();
-                    fait = client.inscrire(rechercheBibliotheque(bibliotheque));
+
+
+                    biblio = rechercheBibliotheque(bibliotheque);
+                    Client client = new Client(nom, prenom);
+                    fait = client.inscrire(biblio);
+
                     if(fait)
                         System.out.println("L'inscription est faite !");
                     else
@@ -160,7 +197,7 @@ public class Main {
                     System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
                     bibliotheque = in.next();
                     // Creer une methode pour afficher le document
-                    rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN);
+                    rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN).afficheDoc();
 
                     break;
 
@@ -171,7 +208,7 @@ public class Main {
                     System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
                     bibliotheque = in.next();
                     // Creer une methode pour afficher le document
-                    rechercheBibliotheque(bibliotheque).rechercheEAN(EAN);
+                    rechercheBibliotheque(bibliotheque).rechercheEAN(EAN).afficheDoc();
 
                     break;
 
@@ -198,9 +235,8 @@ public class Main {
                     }else{
                         System.out.println("Mauvaise selection, retour au menu principal");
                     }
-
-
                     break;
+
                 case 10 :
                     System.out.println("Que voulez vous faire ?");
                     System.out.println("1. Emprunter");
@@ -208,28 +244,28 @@ public class Main {
                     selection = in.nextInt();
                     System.out.println("Dans quelle bibliotheque ?");
                     bibliotheque = in.next();
-                    System.out.println("Quel est votre nom ?");
+                    System.out.println("Quel est le nom du client ?");
                     nom = in.next();
-                    System.out.println("Quel est votre prenom ? ");
+                    System.out.println("Quel est le prenom du client ? ");
                     prenom = in.next();
 
+                    // find client
 
                     if(selection == 1){
                         System.out.println("Vous voulez emprunter");
-
+                        System.out.println("Quel est le document que vous voulez emprunter ?");
+                        System.out.println("1. Recherchez le document par son ISBN");
+                        System.out.println("1. Recherchez le document par son EAN");
 
 
 
                     }else if(selection == 2){
                         System.out.println("Quel est le document que vous voulez rendre ?");
+
                     }else{
 
 
                     }
-
-
-
-
 
                     break;
 
