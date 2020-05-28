@@ -123,9 +123,19 @@ public class Main {
 								afficheReseau();
 								bibliotheque = in.next();
 
-								System.out.println("Est-ce un livre ?");
-								System.out.println("1. Oui");
-								System.out.println("2. Non");
+								System.out.println("Quel est le type de document?");
+								System.out.println("1. Livre");
+								System.out.println("2. Bande dessinee");
+								System.out.println("3. Partition");
+								System.out.println("4. Carte");
+								System.out.println("5. Revue");
+								System.out.println("6. Jeux");
+								System.out.println("7. Jeux de Societe");
+								System.out.println("8. Jeux Video");
+								System.out.println("9. Vinyle");
+								System.out.println("10. Cd");
+								System.out.println("11. Autre");
+								
 								selection = in.nextInt();
 
 								System.out.println("Quel est le numero de serie ?");
@@ -133,37 +143,136 @@ public class Main {
 
 								System.out.println("Combien de documents voulez-vous ajouter ?");
 								nombreExemplaire = in.nextInt();
+								in.nextLine();
 
 								System.out.println("Quel est le titre du documents ?");
-								titre = in.next();
+								titre = in.nextLine();
 
 								System.out.println("Qui est l'editeur ?");
-								editeur = in.next();
+								editeur = in.nextLine();
 
 								System.out.println("Quel est le nom de l'auteur");
-								nom = in.next();
+								nom = in.nextLine();
 
 								System.out.println("Quel est le prenom de l'auteur");
-								prenom = in.next();
+								prenom = in.nextLine();
 
-								do {
-									System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
-									debut = in.next();
-								}while(Integer.parseInt(debut)<0000 && Integer.parseInt(debut)<1000);
-
+								System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
+								debut = in.nextLine();
 								serie = new Serie("AB");
-								System.out.println("Quel est son EAN");
-								EAN = in.next();
 
-								if(selection == 1){
-									System.out.println("Quel est son ISBN ?");
-									ISBN = in.next();
-									if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Livre(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
-										System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
-										System.out.println("Le document a ete ajoute");
-									}
-								}else{
-									// Creer un document
+
+								System.out.println("Quel est son EAN");
+								EAN = in.nextLine();
+								System.out.println("bibliotheque"+bibliotheque);
+								System.out.println("numeroSerie"+numeroSerie);
+								System.out.println("nombreExemplaire"+nombreExemplaire);
+								System.out.println("titre"+titre);
+								System.out.println("editeur"+editeur);
+								System.out.println("nom"+nom);
+								System.out.println("prenom"+prenom);
+								System.out.println("debut"+debut);
+								
+								switch (selection) {
+									case 1:
+										System.out.println("Quel est son ISBN ?");
+										ISBN = in.nextLine();
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Livre(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");											
+										}
+										else
+											System.out.println("l'EAN ou l'ISBN existe deja");
+										break;
+									case 2:
+										System.out.println("Quel est son ISBN ?");
+										ISBN = in.nextLine();
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new BD(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN ou l'ISBN existe deja");
+										break;
+									case 3:
+										System.out.println("Quel est son ISBN ?");
+										ISBN = in.nextLine();
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Partition(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN ou l'ISBN existe deja");
+										break;
+									case 4:
+										System.out.println("Quel est son ISBN ?");
+										ISBN = in.nextLine();
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Carte(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN ou l'ISBN existe deja");
+										break;
+									case 5:
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Revue(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN existe deja");
+										break;
+									case 6:
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Jeux(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN existe deja");
+										break;
+									case 7:
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new JeuxSociete(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN existe deja");
+										break;
+									case 8:
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new JeuxVideo(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN existe deja");
+										break;
+									case 9:
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Vinyle(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN existe deja");
+										break;
+									case 10:
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new CD(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN existe deja");
+										break;
+									case 11:
+										if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Autre(titre,editeur,nom,prenom,EAN, debut ,nombreExemplaire, numeroSerie, serie), nombreExemplaire)){
+											System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
+											System.out.println("Le document a ete ajoute");
+										}
+										else
+											System.out.println("l'EAN existe deja");
+										break;
+									default:
+										System.out.println("le type de document que vous avez choisi est incorrect");
+											
 								}
 							}catch (ExceptionBibliothequeDoesNotExist e){
 		                    	System.out.println(e.getMessage());
