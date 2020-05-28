@@ -8,20 +8,20 @@ public abstract class Document{
     private String EAN;
     private String datePublication;
     private int nbExemplaire;
-    private Integer numeroSerie;//numero dans la serie
+    private Integer numeroSerie;
     private Serie serie;
 
     /**
      * Constructeur qui ne prend en compte ni l'EAN ni le numero de serie
      * @param titre titre du document
-     * @param editeur
-     * @param nomAuteur
-     * @param prenomAuteur
-     * @param EAN
-     * @param datePublication
-     * @param nombreExemplaire
-     * @param numeroSerie
-     * @param serie
+     * @param editeur editeur du document
+     * @param nomAuteur nom de l'auteur du document
+     * @param prenomAuteur prenom de l'auteur du docuemnt
+     * @param EAN EAN du document
+     * @param datePublication date de publication du document
+     * @param nombreExemplaire nombre d'exemplaire du document
+     * @param numeroSerie numero dans la serie du document
+     * @param serie serie du document
      */
     public Document(String titre, String editeur, String nomAuteur, String prenomAuteur, String EAN, String datePublication, int nombreExemplaire, Integer numeroSerie, Serie  serie){
         this.titre = titre;
