@@ -27,6 +27,14 @@ public class Client {
         return nom.ajouterClient(this);
     }
 
+    public String getNom(){
+        return nom;
+    }
+
+    public String getPrenom(){
+        return prenom;
+    }
+
     /**
      * Methode qui permet de verifier si le client est inscrit a une bibliotheque
      * @param bibliotheque la bibliotheque que l'on veut verifier

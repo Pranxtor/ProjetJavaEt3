@@ -43,6 +43,14 @@ public class Emprunt {
         return false;
     }
 
+    public Client getClient(){
+        return client;
+    }
+
+    public Bibliotheque getBibliotheque(){
+        return bibliotheque;
+    }
+
     /**
      * Methode qui permet de rendre un document
      * @param document le document que le client veut rendre

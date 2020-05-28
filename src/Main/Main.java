@@ -5,37 +5,42 @@ import Reseau.*;
 import Exception.*;
 
 import javax.print.Doc;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 import static Reseau.Bibliotheque.*;
 
 public class Main {
+
+
+
     public static void main(String[] args){
 
         int selection;
-        String titre;
-        String nom;
-        String prenom;
-        int numNotice;
+        String titre="";
+        String nom="";
+        String prenom="";
         int numeroSerie;
         int nombreExemplaire;
-        String editeur;
+        String editeur="";
         Serie serie;
-        String adresse;
-        String ISBN;
-        String EAN;
-        String bibliotheque;
-        String date;
-        String debut;
-        String fin;
+        String adresse="";
+        String ISBN="";
+        String EAN="";
+        String bibliotheque="";
+        String date="";
+        String debut="";
+        String fin="";
+        Date dateDebut;
+        Date dateFin;
         boolean fait;
+        Client client = new Client("","");
         ArrayList<Bibliotheque> b = new ArrayList<Bibliotheque>();
+        ArrayList<Client> c = new ArrayList<>();
     	ArrayList<Document> d = new ArrayList<Document>();
+    	ArrayList<Emprunt> emprunts = new ArrayList<>();
     	int i = 0;
     	int j = 0;
     	
@@ -65,8 +70,9 @@ public class Main {
 		            System.out.println("6. Consulter les documents d'un auteur"); // ok
 		            System.out.println("7. Rechercher un livre par son ISBN");    // ok
 		            System.out.println("8. Rechercher un document par son EAN");  // ok
-		            System.out.println("9. Consulter le nombre de documents publies sur une periode");  // TODO DATES !
+		            System.out.println("9. Consulter le nombre de documents publies sur une periode"); // ok
 		            System.out.println("10. Emprunter ou rendre un document pour un client"); // TODO
+
 		            try{
 		                selection = in.nextInt();
 
@@ -78,41 +84,51 @@ public class Main {
 		                    adresse = in.next();
 
 		                    Bibliotheque biblio = new Bibliotheque(bibliotheque,adresse);
+		                    b.add(biblio);
 		                    System.out.println("Le reseau est composé de ces bibliotheques");
 		                    afficheReseau();
 		                    System.out.println("");
 		                    break;
 
 		                case 2:
+
 		                    System.out.println("Si vous ne savez pas, appuyez sur entree directement");
+							System.out.println("Quel est le numero de serie ?");
+							numeroSerie = in.nextInt();
+
+							System.out.println("Combien de documents voulez-vous ajouter ?");
+							nombreExemplaire = in.nextInt();
+
+							titre = in.nextLine();
 		                    System.out.println("Quel est le titre du documents ?");
-		                    titre = in.next();
-		                    System.out.println("Quel est le numero de notice ?");
-		                    numNotice = in.nextInt();
+
+							editeur = in.nextLine();
 		                    System.out.println("Qui est l'editeur ?");
-		                    editeur = in.next();
+
+							nom = in.nextLine();
 		                    System.out.println("Quel est le nom de l'auteur");
-		                    nom = in.next();
+
+							prenom = in.nextLine();
 		                    System.out.println("Quel est le prenom de l'auteur");
-		                    prenom = in.next();
-		                    System.out.println("Quelle est la date de publication. Ecrivez sous la forme JJ/MM/AA");
-		                    date = in.next();
+
+							debut = in.nextLine();
+		                    System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
+
+							EAN = in.nextLine();
 		                    System.out.println("Quel est son EAN");
-		                    EAN = in.next();
 
 		                    System.out.println("Est-ce un livre ?");
 		                    System.out.println("1. Oui");
 		                    System.out.println("2. Non");
 		                    selection = in.nextInt();
+
 		                    if(selection == 1){
 		                        System.out.println("Quel est son ISBN ?");
-		                        ISBN = in.next();
-		                        //Livre doc = new Livre(titre, numNotice,editeur,nom,prenom,date,EAN,numeroSerie,nombreExemplaire,ISBN,serie)
+		                        ISBN = in.nextLine();
+		                        //Livre doc = new Livre(titre,editeur,nom,prenom,EAN, date ,nombreExemplaire, numeroSerie, serie, ISBN);
 		                    }else{
-		                        //Document doc = new Document(titre,numNotice,editeur,nom,prenom,date,EAN,numeroSerie,nombreExemplaire,serie);
+		                    	// Creer un document
 		                    }
-
-
 		                    System.out.println("Dans quelle bibliotheque voulez vous ajouter votre document ?");
 		                    afficheReseau();
 		                    bibliotheque = in.next();
@@ -122,19 +138,21 @@ public class Main {
 		                    break;
 
 		                case 3:
-
 		                    System.out.println("Entrer le nom du client");
 		                    nom = in.next();
+
 		                    System.out.println("Entrer le prenom");
 		                    prenom = in.next();
+
 		                    System.out.println("Dans quel bibliotheque voulez vous l'inscrire parmi cette liste de bibliotheque ? \nEcirvez le nom de la bibliotheque");
 		                    afficheReseau();
 		                    bibliotheque = in.next();
 
 		                    try{
 		                        biblio = rechercheBibliotheque(bibliotheque);
-		                        Client client = new Client(nom, prenom);
-		                        fait = client.inscrire(biblio);
+		                        Client clients = new Client(nom, prenom);
+		                        fait = clients.inscrire(biblio);
+		                        c.add(clients);
 		                        if(fait)
 		                            System.out.println("L'inscription est faite !");
 		                        else
@@ -142,18 +160,14 @@ public class Main {
 		                    }catch (ExceptionBibliothequeDoesNotExist e){
 		                        System.out.println(e.getMessage());
 		                    }
-
-
 		                    break;
 
 		                case 4:
-		                    System.out.println("1. Retour au menu");
-		                    System.out.println("2. Consulter dans une bibliotheque");
-		                    System.out.println("3. Consulter dans le reseau");
+		                    System.out.println("1. Consulter dans une bibliotheque");
+		                    System.out.println("2. Consulter dans le reseau");
+							System.out.println("Autre chiffre. Retour au menu");
 		                    selection = in.nextInt();
 		                    if(selection == 1){
-		                        // Nothing to do here
-		                    }else if(selection == 2){
 		                        System.out.println("Quel est le nom de votre bibliotheque parmi cette liste");
 		                        afficheReseau();
 		                        bibliotheque = in.next();
@@ -164,11 +178,11 @@ public class Main {
 		                            System.out.println(e.getMessage());
 		                        }
 
-		                    }else if(selection == 3){
+		                    }else if(selection == 2){
 		                        System.out.println("Voici les differents documents");
 		                        consulterToutDocReseau();
 		                    }else{
-		                        System.out.println("Mauvaise selection, retour au menu principal");
+		                        System.out.println("Retour au menu principal");
 		                    }
 		                    break;
 
@@ -176,6 +190,7 @@ public class Main {
 		                    System.out.println("Vous voulez consulter une serie");
 		                    System.out.println("1. Dans une bibliotheque");
 		                    System.out.println("2. Dans le resaeu");
+							System.out.println("Autre chiffre. Retour au menu");
 		                    selection = in.nextInt();
 
 		                    System.out.println("Entrer le titre de la serie");
@@ -192,14 +207,15 @@ public class Main {
 		                        }
 		                    }else if(selection == 2){
 		                        consulterSerieReseau(titre);
-		                    }
+		                    }else{
+							}
 		                    break;
 
 		                case 6:
 		                    System.out.println("Vous voulez consulter les documents d'un auteur");
 		                    System.out.println("1. Dans le reseau");
 		                    System.out.println("2. Dans une bibliotheque");
-		                    System.out.println("Autre. Retour au menu");
+		                    System.out.println("Autre chiffre. Retour au menu");
 
 		                    selection = in.nextInt();
 
@@ -237,7 +253,7 @@ public class Main {
 		                        }
 
 		                    }else{
-		                        System.out.println("Mauvaise selection. Retour au menu");
+		                        System.out.println("Retour au menu");
 		                    }
 		                    break;
 
@@ -252,8 +268,6 @@ public class Main {
 		                    }catch (ExceptionBibliothequeDoesNotExist e){
 		                        System.out.println(e.getMessage());
 		                    }
-
-
 		                    break;
 
 		                case 8:
@@ -267,8 +281,6 @@ public class Main {
 		                    }catch (ExceptionBibliothequeDoesNotExist e){
 		                        System.out.println(e.getMessage());
 		                    }
-
-
 		                    break;
 
 		                case 9:
@@ -282,21 +294,20 @@ public class Main {
 		                    System.out.println("Donner la date de fin sous la forme : AAAA");
 		                    fin = in.next();
 
-
+							dateDebut = new SimpleDateFormat("yyyy").parse(debut);
+							dateFin = new SimpleDateFormat("yyyy").parse(fin);
 
 		                    if(selection == 1){
-		                        //filtreperiodeReseau(debut, fin);
+		                        filtreperiodeReseau(dateDebut, dateFin);
 		                    }else if(selection == 2){
 		                        System.out.println("Parmi la liste des bibliotheques, laquelle choisissez vous ?");
 		                        afficheReseau();
 		                        bibliotheque = in.next();
-								/*try{
-									//rechercheBibliotheque(bibliotheque).filtreperiode(debut, fin);
+								try{
+									rechercheBibliotheque(bibliotheque).filtreperiode(dateDebut, dateFin);
 								}catch (ExceptionBibliothequeDoesNotExist e){
 									System.out.println(e.getMessage());
 								}
-
-								 */
 		                    }else{
 		                        System.out.println("Mauvaise selection, retour au menu principal");
 		                    }
@@ -307,31 +318,48 @@ public class Main {
 		                    System.out.println("1. Emprunter");
 		                    System.out.println("2. Rendre");
 		                    selection = in.nextInt();
+
 		                    System.out.println("Dans quelle bibliotheque ?");
 		                    bibliotheque = in.next();
-		                    System.out.println("Quel est le nom du client ?");
-		                    nom = in.next();
-		                    System.out.println("Quel est le prenom du client ? ");
-		                    prenom = in.next();
 
-		                    // find client
+		                    System.out.println("Quel est le nom de votre client ?");
+		                    nom = in.next();
+		                    System.out.println("Quel est le prenom de votre client ?");
+							prenom = in.next();
+
+							try{
+								for(Client k : c){
+									if(k.getNom().equals(nom) && k.getPrenom().equals(prenom)){
+										client = k;
+									}
+								}
+
+								for(Emprunt k : emprunts){
+									if(k.getClient() == client && k.getBibliotheque() == rechercheBibliotheque(bibliotheque)){
+
+									}
+								}
+							}catch (ExceptionBibliothequeDoesNotExist e){
+								System.out.println(e.getMessage());
+							}
 
 		                    if(selection == 1){
 		                        System.out.println("Vous voulez emprunter");
 		                        System.out.println("Quel est le document que vous voulez emprunter ?");
 		                        System.out.println("1. Recherchez le document par son ISBN");
-		                        System.out.println("1. Recherchez le document par son EAN");
-
+		                        System.out.println("2. Recherchez le document par son EAN");
+		                        selection = in.nextInt();
 
 
 		                    }else if(selection == 2){
 		                        System.out.println("Quel est le document que vous voulez rendre ?");
+		                        titre = in.next();
+
+
 
 		                    }else{
 
-
 		                    }
-
 		                    break;
 
 		                default:
@@ -342,7 +370,7 @@ public class Main {
 		            System.out.println();
 		            System.out.println();
 
-		            }catch (java.util.InputMismatchException e){
+		            }catch (InputMismatchException | ParseException e){
 		                System.out.println("Mauvaise selection. Recommencez !");
 		            }
 		        }while(true);
@@ -359,5 +387,6 @@ public class Main {
 
         
     }
+
 
 }
