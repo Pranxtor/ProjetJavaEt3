@@ -458,8 +458,8 @@ public class Bibliotheque {
 	 */
 	public ArrayList<Document> consulterToutDoc() {
     	ArrayList<Document> docs= new ArrayList<Document>();
+    	System.out.println(nom);
     	System.out.println(collection);
-    	
     	for(Document doc : collection.keySet()) {
     		docs.add(doc);
     	}
