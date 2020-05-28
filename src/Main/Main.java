@@ -19,6 +19,9 @@ public class Main {
         String nom;
         String prenom;
         String adresse;
+        String ISBN;
+        String EAN;
+        String bibliotheque;
         String debut;
         String fin;
         boolean fait;
@@ -28,28 +31,27 @@ public class Main {
 
             System.out.println("Choisissez parmi ces options");
 
-            System.out.println("1. Ajouter une nouvelle bibliotheque");
+            System.out.println("1. Ajouter une nouvelle bibliotheque"); // ok
             System.out.println("2. Ajouter un nouveau document dans le reseau"); // TODO
-            System.out.println("3. Ajouter un nouvel utilisateur"); // Ok
-            System.out.println("4. Consulter tous les documents");
-            System.out.println("5. Consulter les documents d'une serie");
-            System.out.println("6. Consulter les documents d'un auteur");
-            System.out.println("7. Rechercher un livre par son ISBN");
-            System.out.println("8. Rechercher un document par son EAN");
+            System.out.println("3. Ajouter un nouvel utilisateur"); // ok
+            System.out.println("4. Consulter tous les documents");  // ok
+            System.out.println("5. Consulter les documents d'une serie"); //
+            System.out.println("6. Consulter les documents d'un auteur"); // ok
+            System.out.println("7. Rechercher un livre par son ISBN");    // Creer une methode pour afficher le document
+            System.out.println("8. Rechercher un document par son EAN");  // Creer une methode pour afficher le document
             System.out.println("9. Consulter le nombre de documents publies sur une periode");  // TODO DATES !
-            // TODO ajouter des fonctionnalités pour emprunter ou rendre un document
-            System.out.println("10. Emprunter ou rendre un document pour un client");
+            System.out.println("10. Emprunter ou rendre un document pour un client"); // TODO
 
             selection = in.nextInt();
 
             switch (selection) {
                 case 1:
                     System.out.println("Donner le nom de la bibliotheque");
-                    nom = in.next();
+                    bibliotheque = in.next();
                     System.out.println("Donner l'adresse de la bibliotheque");
                     adresse = in.next();
 
-                    Bibliotheque biblio = new Bibliotheque(nom,adresse);
+                    Bibliotheque biblio = new Bibliotheque(bibliotheque,adresse);
                     System.out.println("Le reseau est composé de ces bibliotheques");
                     afficheReseau();
                     System.out.println("");
@@ -61,8 +63,9 @@ public class Main {
                     // J'attends d'avoir ton push pour le faire
                     System.out.println("Dans quelle bibliotheque voulez vous ajouter votre document ?");
                     afficheReseau();
-                    nom = in.next();
-                    //rechercheBibliotheque(nom).ajouterDocument(doc);
+                    bibliotheque = in.next();
+                    // TODO
+                    //rechercheBibliotheque(bibliotheque).ajouterDocument(doc);
                     break;
 
                 case 3:
@@ -74,8 +77,8 @@ public class Main {
 
                     System.out.println("Dans quel bibliotheque voulez vous l'inscrire parmi cette liste de bibliotheque ? \nEcirvez le nom de la bibliotheque");
                     afficheReseau();
-                    nom = in.next();
-                    fait = client.inscrire(rechercheBibliotheque(nom));
+                    bibliotheque = in.next();
+                    fait = client.inscrire(rechercheBibliotheque(bibliotheque));
                     if(fait)
                         System.out.println("L'inscription est faite !");
                     else
@@ -88,11 +91,18 @@ public class Main {
                     System.out.println("3. Consulter dans le reseau");
                     selection = in.nextInt();
                     if(selection == 1){
-
+                        // Nothing to do here
                     }else if(selection == 2){
-
+                        System.out.println("Quel est le nom de votre bibliotheque parmi cette liste");
+                        afficheReseau();
+                        bibliotheque = in.next();
+                        System.out.println("Voici les differents documents");
+                        rechercheBibliotheque(bibliotheque).consulterToutDoc();
                     }else if(selection == 3){
-
+                        System.out.println("Voici les differents documents");
+                        consulterToutDocReseau();
+                    }else{
+                        System.out.println("Mauvaise selection, retour au menu principal");
                     }
                     break;
 
@@ -103,15 +113,65 @@ public class Main {
                     break;
 
                 case 6:
+                    System.out.println("Vous voulez consulter les documents d'un auteur");
+                    System.out.println("1. Dans le reseau");
+                    System.out.println("2. Dans une bibliotheque");
+                    System.out.println("Autre. Retour au menu");
 
+                    selection = in.nextInt();
+
+                    System.out.println("Entrez son nom. Si vous ne le connaissez pas, appuyez sur entree");
+                    nom = in.next();
+                    System.out.println("Entrez son prenom. Si vous ne le connaissez pas, appuyez sur entree");
+                    prenom = in.next();
+
+                    if(selection == 1){
+                        if(nom.isBlank() && !prenom.isBlank()){
+                            consulterPrenomReseau(prenom);
+                        }else if(!nom.isBlank() && prenom.isBlank()){
+                            consulterReseau(nom);
+                        }else if(!nom.isBlank() && !prenom.isBlank()){
+                            consulterReseau(nom, prenom);
+                        }else{
+                            System.out.println("Impossible de mener la recherche");
+                        }
+                    }else if(selection == 2){
+                        System.out.println("Quel est le nom de la bibliotheque parmi cette liste");
+                        afficheReseau();
+                        bibliotheque = in.next();
+                        if(nom.isBlank() && !prenom.isBlank()){
+                            rechercheBibliotheque(bibliotheque).consulterPrenom(prenom);
+                        }else if(!nom.isBlank() && prenom.isBlank()){
+                            rechercheBibliotheque(bibliotheque).consulter(nom);
+                        }else if(!nom.isBlank() && !prenom.isBlank()){
+                            rechercheBibliotheque(bibliotheque).consulter(nom, prenom);
+                        }else{
+                            System.out.println("Impossible de mener la recherche");
+                        }
+                    }else{
+                        System.out.println("Mauvaise selection. Retour au menu");
+                    }
                     break;
 
                 case 7:
+                    System.out.println("Vous voulez chercher un document par son ISBN");
+                    System.out.println("Quel est l'ISBN de votre document ?");
+                    ISBN = in.next();
+                    System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
+                    bibliotheque = in.next();
+                    // Creer une methode pour afficher le document
+                    rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN);
+
                     break;
 
                 case 8:
-                    System.out.println("8. Rechercher un document par son EAN");
-
+                    System.out.println("Vous voulez chercher un document par son EAN");
+                    System.out.println("Quel est l'EAN de votre document ?");
+                    EAN = in.next();
+                    System.out.println("Dans quelle bibliotheque voulez-vous chercher votre document ?");
+                    bibliotheque = in.next();
+                    // Creer une methode pour afficher le document
+                    rechercheBibliotheque(bibliotheque).rechercheEAN(EAN);
 
                     break;
 
@@ -121,24 +181,20 @@ public class Main {
                     System.out.println("2. Bibliotheque");
                     selection = in.nextInt();
 
+                    // TODO trouver un moyen pour les dates
+                    System.out.println("Donner la date de debut sous la forme : JJ/MM/AA");
+                    debut = in.next();
+                    System.out.println("Donner la date de fin sous la forme : JJ/MM/AA");
+                    fin = in.next();
+
                     if(selection == 1){
-                        System.out.println("Donner la date de debut sous la forme : JJ/MM/AA");
-                        debut = in.next();
-                        System.out.println("Donner la date de fin sous la forme : JJ/MM/AA");
-                        fin = in.next();
-                        // TODO trouver un moyen pour les dates
                         //filtreperiodeReseau(debut, fin);
                     }else if(selection == 2){
                         System.out.println("Parmi la liste des bibliotheques, laquelle choisissez vous ?");
                         afficheReseau();
-                        nom = in.next();
+                        bibliotheque = in.next();
 
-                        System.out.println("Donner la date de debut sous la forme : JJ/MM/AA");
-                        debut = in.next();
-                        System.out.println("Donner la date de fin sous la forme : JJ/MM/AA");
-                        fin = in.next();
-                        // TODO trouver un moyen pour les dates
-                        //rechercheBibliotheque(nom).filtreperiode(debut, fin);
+                        //rechercheBibliotheque(bibliotheque).filtreperiode(debut, fin);
                     }else{
                         System.out.println("Mauvaise selection, retour au menu principal");
                     }
@@ -146,9 +202,34 @@ public class Main {
 
                     break;
                 case 10 :
-                    System.out.println("Quel est le nom de votre client ?");
+                    System.out.println("Que voulez vous faire ?");
+                    System.out.println("1. Emprunter");
+                    System.out.println("2. Rendre");
+                    selection = in.nextInt();
+                    System.out.println("Dans quelle bibliotheque ?");
+                    bibliotheque = in.next();
+                    System.out.println("Quel est votre nom ?");
+                    nom = in.next();
+                    System.out.println("Quel est votre prenom ? ");
+                    prenom = in.next();
 
-                    System.out.println("Quel est le document que vous voulez rendre ?");
+
+                    if(selection == 1){
+                        System.out.println("Vous voulez emprunter");
+
+
+
+
+                    }else if(selection == 2){
+                        System.out.println("Quel est le document que vous voulez rendre ?");
+                    }else{
+
+
+                    }
+
+
+
+
 
                     break;
 

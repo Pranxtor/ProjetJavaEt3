@@ -7,6 +7,7 @@ public class Client {
     private String prenom;
     private ArrayList<Bibliotheque> bibliotheque;
 
+
     /**
      * Constructeur
      * @param surname prenom du client

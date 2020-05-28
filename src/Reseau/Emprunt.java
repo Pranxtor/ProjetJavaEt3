@@ -18,6 +18,7 @@ public class Emprunt {
      */
     public Emprunt(int nombreLivreMax, Client client, Bibliotheque bibliotheque){
         if(!client.estInscrit(bibliotheque)){
+            System.out.println("Le client a ete inscrit !");
             bibliotheque.ajouterClient(client);
             client.inscrire(bibliotheque);
         }
@@ -32,7 +33,7 @@ public class Emprunt {
      * @param document le document que le client veut emprunter
      * @return true si l'emprunt a ete fait, false sinon
      */
-    public boolean emprunter(Document document){
+    public boolean emprunter (Document document){
         if(listeEmprunt.size() < nbLivreMax && bibliotheque.emprunter(document)) {
             listeEmprunt.add(document);
             System.out.println("Le document est dans la bibliothèque");
