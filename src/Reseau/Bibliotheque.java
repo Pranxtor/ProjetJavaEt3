@@ -48,9 +48,6 @@ public class Bibliotheque {
 		}
 	}
 
-
-
-
 	/**
 	 * Methode qui permet de retrouver une bibliotheque a partir de son nom
 	 * @param nom nom de la bibliotheque
@@ -212,8 +209,9 @@ public class Bibliotheque {
 			listTypeDoc.add(typeDoc);
 
 			for(Document doc : collection.keySet()){ // On parcourt tous les documents
+
 				doc.getDatePublication();
-				Date date =new SimpleDateFormat("yyyy").parse(doc.getDatePublication());
+				Date date = new SimpleDateFormat("yyyy").parse(doc.getDatePublication());
 				if(date.after(debut) && date.before(fin)){ // Si on est compris dans la periode
 
 					for(ArrayList<String> type : listTypeDoc){ // En parcourant la liste de type de documents deja connu

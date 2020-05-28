@@ -5,6 +5,7 @@ import Reseau.*;
 import Exception.*;
 
 import javax.print.Doc;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Main {
         String ISBN;
         String EAN;
         String bibliotheque;
-        Date date;
+        String date;
         String debut;
         String fin;
         boolean fait;
@@ -38,18 +39,18 @@ public class Main {
     	int i = 0;
     	int j = 0;
     	
-    	if(args.length > 0)
-		{
-			java.io.File tempFile = new java.io.File(args[0]);
+    	//if(args.length > 0)
+		//{
+			//java.io.File tempFile = new java.io.File(args[0]);
 			
-			if(tempFile.exists())
-			{
-				System.out.println("[Main] Reading the file " + args[0] + " ...");
+			//if(tempFile.exists())
+			//{
+				//System.out.println("[Main] Reading the file " + args[0] + " ...");
 						
 				//We start by reading the CSV file
-				FileReader.getDataFromCSVFile(args[0],b,d);
+				//FileReader.getDataFromCSVFile(args[0],b,d);
 				
-				System.out.println("[Main] End of the file " + args[0] + ".");
+				//System.out.println("[Main] End of the file " + args[0] + ".");
 				
 				do{
 		            java.util.Scanner in = new Scanner(System.in);
@@ -95,7 +96,7 @@ public class Main {
 		                    System.out.println("Quel est le prenom de l'auteur");
 		                    prenom = in.next();
 		                    System.out.println("Quelle est la date de publication. Ecrivez sous la forme JJ/MM/AA");
-		                    // TODO DATE DE PUBLICATION
+		                    date = in.next();
 		                    System.out.println("Quel est son EAN");
 		                    EAN = in.next();
 
@@ -276,11 +277,12 @@ public class Main {
 		                    System.out.println("2. Bibliotheque");
 		                    selection = in.nextInt();
 
-		                    // TODO trouver un moyen pour les dates
-		                    System.out.println("Donner la date de debut sous la forme : JJ/MM/AA");
+		                    System.out.println("Donner la date de debut sous la forme : AAAA");
 		                    debut = in.next();
-		                    System.out.println("Donner la date de fin sous la forme : JJ/MM/AA");
+		                    System.out.println("Donner la date de fin sous la forme : AAAA");
 		                    fin = in.next();
+
+
 
 		                    if(selection == 1){
 		                        //filtreperiodeReseau(debut, fin);
@@ -288,8 +290,13 @@ public class Main {
 		                        System.out.println("Parmi la liste des bibliotheques, laquelle choisissez vous ?");
 		                        afficheReseau();
 		                        bibliotheque = in.next();
+								/*try{
+									//rechercheBibliotheque(bibliotheque).filtreperiode(debut, fin);
+								}catch (ExceptionBibliothequeDoesNotExist e){
+									System.out.println(e.getMessage());
+								}
 
-		                        //rechercheBibliotheque(bibliotheque).filtreperiode(debut, fin);
+								 */
 		                    }else{
 		                        System.out.println("Mauvaise selection, retour au menu principal");
 		                    }
@@ -339,16 +346,16 @@ public class Main {
 		                System.out.println("Mauvaise selection. Recommencez !");
 		            }
 		        }while(true);
-			}
-			else
-			{
-				System.out.println("[Main] No file " + args[0]);
-			}
-		}
-		else
-		{
-			System.out.println("[Main] You should enter the CSV file path as a parameter.");
-		}
+			//}
+			//else
+			//{
+				//System.out.println("[Main] No file " + args[0]);
+			//}
+		//}
+		//else
+		//{
+			//System.out.println("[Main] You should enter the CSV file path as a parameter.");
+		//}
 
         
     }
