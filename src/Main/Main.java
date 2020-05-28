@@ -72,8 +72,9 @@ public class Main {
 		            System.out.println("6. Consulter les documents d'un auteur"); // ok
 		            System.out.println("7. Rechercher un livre par son ISBN");    // ok
 		            System.out.println("8. Rechercher un document par son EAN");  // ok
-		            System.out.println("9. Consulter le nombre de documents publies sur une periode"); //
+		            System.out.println("9. Consulter le nombre de documents publies sur une periode"); // OK
 		            System.out.println("10. Emprunter ou rendre un document pour un client"); // ok
+		            System.out.println("11. Echange de document entre deux bibliotheques");
 
 		            try{
 		                selection = in.nextInt();
@@ -138,17 +139,8 @@ public class Main {
 								debut = in.nextLine();
 								serie = new Serie("AB");
 
-
 								System.out.println("Quel est son EAN");
 								EAN = in.nextLine();
-								System.out.println("bibliotheque"+bibliotheque);
-								System.out.println("numeroSerie"+numeroSerie);
-								System.out.println("nombreExemplaire"+nombreExemplaire);
-								System.out.println("titre"+titre);
-								System.out.println("editeur"+editeur);
-								System.out.println("nom"+nom);
-								System.out.println("prenom"+prenom);
-								System.out.println("debut"+debut);
 								
 								switch (selection) {
 									case 1:
@@ -533,7 +525,11 @@ public class Main {
 								System.out.println(e.getMessage());
 							}
 		                    break;
+						case 11:
+							System.out.println("Echange entre deux bibliotheques");
 
+
+							break;
 		                default:
 		                    System.out.println();
 		                    System.out.println("Refaite votre choix !");

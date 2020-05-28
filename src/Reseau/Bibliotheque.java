@@ -3,6 +3,7 @@ package Reseau;
 import Documents.*;
 import Exception.*;
 
+import java.net.StandardSocketOptions;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -202,45 +203,35 @@ public class Bibliotheque {
 		if(collection.isEmpty()){                            // Si la collection est vide, ne rien faire
 			System.out.println("Votre collection est vide");
 		}else{						                         // Si la collection n'est pas vide
-
-
-			// Le probleme
-			// private HashMap<Document,Integer> collection;// document , nombre d'exemplaire
-
-			typeDoc.add(collection.get(0).getClass().toString());  // On inplemente une partie
-			typeDoc.add(Integer.toString(0));
-			listTypeDoc.add(typeDoc);
-
-			/*
 			for(Document doc : collection.keySet()){ // On parcourt tous les documents
-
 				doc.getDatePublication();
 				Date date = new SimpleDateFormat("yyyy").parse(doc.getDatePublication());
 				if(date.after(debut) && date.before(fin)){ // Si on est compris dans la periode
+					if(listTypeDoc.isEmpty()){                // Dans le cas ou on itere pour la premiere fois, on initialise a la main
+						typeDoc.add(doc.getClass().toString());
+						typeDoc.add(Integer.toString(1));
+						listTypeDoc.add(typeDoc);
+						System.out.println(typeDoc);
+					}else{
+						for(ArrayList<String> type : listTypeDoc){ // En parcourant la liste de type de documents deja connu
+							if(type.contains(doc.getClass().toString())){ // Si le type de documents est deja dans la liste de type de document
+								type.set(1, Integer.toString(Integer.parseInt(type.get(1))+1));
+								estDedans = true;
+								System.out.println(typeDoc);
+							}
+						}
+						if(!estDedans){  // Si on a parcouru toute la liste de types de documents deja connu mais que le type n'est pas connu
 
-					for(ArrayList<String> type : listTypeDoc){ // En parcourant la liste de type de documents deja connu
-						if(type.contains(doc.getClass().toString())){ // Si le type de documents est deja dans la liste de type de document
-							type.set(1, Integer.toString(Integer.parseInt(type.get(1))+1));
-							estDedans = true;
+							typeDoc =(ArrayList<String>) typeDoc.clone();
+							typeDoc.set(0, doc.getClass().toString());
+							typeDoc.set(1, Integer.toString(1));
+							listTypeDoc.add(typeDoc);
+							System.out.println(typeDoc);
 						}
 					}
-					if(!estDedans){  // Si on a parcouru toute la liste de types de documents deja connu mais que le type n'est pas connu
-						typeDoc =(ArrayList<String>) typeDoc.clone();
-						typeDoc.set(0, doc.getClass().toString());
-						typeDoc.set(1, Integer.toString(1));
-						listTypeDoc.add(typeDoc);
-					}
-
-
 					estDedans = false;
-
-
 				}
-
-
 			}
-*/
-
 		}
 		return listTypeDoc;
 	}
