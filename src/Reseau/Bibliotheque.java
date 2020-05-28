@@ -36,8 +36,27 @@ public class Bibliotheque {
         reseauBibliotheque.add(this);
     }
 
+	/**
+	 * Methode qui permet d'afficher le nom de l'ensemble des bibliotheques du reseau
+	 */
     public static void afficheReseau(){
-		System.out.println(reseauBibliotheque.toString());
+		for(Bibliotheque bibliotheque : reseauBibliotheque){
+			System.out.println(bibliotheque.nom);
+		}
+	}
+
+	/**
+	 * Methode qui permet de retrouver une bibliotheque a partir de son nom
+	 * @param nom nom de la bibliotheque
+	 * @return retourne la bibliotheque si elle existe, null sinon
+	 */
+	public static Bibliotheque rechercheBibliotheque(String nom){
+		for(Bibliotheque bibliotheque : reseauBibliotheque){
+			if(bibliotheque.nom.equals(nom)){
+				return bibliotheque;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -141,7 +160,7 @@ public class Bibliotheque {
 	 * @param titre chaine de caractere representant le titre de la serie de documents
 	 * @return Les documents d'une serie tries par date de publication
 	 */
-	public ArrayList<Document> consulterSerieReseau(String titre){
+	public static ArrayList<Document> consulterSerieReseau(String titre){
     	ArrayList<Document> serie = new ArrayList<>();
 		ArrayList<Document> intermediaire = new ArrayList<>();
 
@@ -329,11 +348,12 @@ public class Bibliotheque {
 	public boolean ajouterClient(Client nouveau){
     	boolean dedans;
     	if(clients.contains(nouveau)){
-			clients.add(nouveau);
-    		dedans = true;
-		}
-    	else
 			dedans = false;
+		}
+    	else{
+			clients.add(nouveau);
+			dedans = true;
+    	}
     	return dedans;
 	}
 
@@ -386,7 +406,7 @@ public class Bibliotheque {
 	 * Methode qui permet de consulter tous les documents du reseau
 	 * @return Liste de tous les documents de la bibliotheque
 	 */
-    public ArrayList<Document> consulterToutDocReseau(){
+    public static ArrayList<Document> consulterToutDocReseau(){
 		ArrayList<Document> docs = new ArrayList<>();
 		ArrayList<Document> listIntermediaire = new ArrayList<>();
 		for(Bibliotheque bibliotheque : reseauBibliotheque){
