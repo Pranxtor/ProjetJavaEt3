@@ -36,10 +36,10 @@ public class Emprunt {
     public boolean emprunter (Document document){
         if(listeEmprunt.size() < nbLivreMax && bibliotheque.emprunter(document)) {
             listeEmprunt.add(document);
-            System.out.println("Le document est dans la bibliothèque");
+            System.out.println("Le document est dans la bibliotheque");
             return true;
         }
-        System.out.println("Le document n'est pas dans la bibliothèque");
+        System.out.println("Le document n'est pas dans la bibliotheque");
         return false;
     }
 
@@ -61,7 +61,7 @@ public class Emprunt {
             bibliotheque.rendre(document);
             return true;
         }
-        System.out.println("Vous n'avez pas emprunté ce document");
+        System.out.println("Vous n'avez pas emprunte ce document");
         return false;
     }
 

@@ -14,8 +14,6 @@ import static Reseau.Bibliotheque.*;
 
 public class Main {
 
-
-
     public static void main(String[] args){
 
         int selection;
@@ -75,7 +73,6 @@ public class Main {
 
 		            try{
 		                selection = in.nextInt();
-
 		            switch (selection) {
 		                case 1:
 		                    System.out.println("Donner le nom de la bibliotheque");
@@ -333,9 +330,12 @@ public class Main {
 										client = k;
 									}
 								}
+								if(client.equals(null)){
 
+								}
+// verifier s'il ne trouve rien
 								for(Emprunt k : emprunts){
-									if(k.getClient() == client && k.getBibliotheque() == rechercheBibliotheque(bibliotheque)){
+									if(k.getClient().equals(client) && k.getBibliotheque().equals(rechercheBibliotheque(bibliotheque))){
 
 									}
 								}
