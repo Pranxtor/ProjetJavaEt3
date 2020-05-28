@@ -39,8 +39,8 @@ public abstract class Document{
     }
 
     /**
-     * retourne l'EAN du livre
-     * @return l'EAN du livre
+     * retourne l'EAN du document
+     * @return l'EAN du document
      */
     public String getEAN(){
         return this.EAN;
@@ -48,63 +48,63 @@ public abstract class Document{
 
     /**
      * retourne l'editeur du document
-     * @return l'editeur du livre
+     * @return l'editeur du document
      */
     public String getEditeur(){
         return this.editeur;
     }
 
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * retourne le nom du document
+     * @return le nom du document
      */
     public String getNomAuteur(){
         return this.nomAuteur;
     }
 
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * retourne prenom du document
+     * @return prenom du document
      */
     public String getPrenomAuteur(){
         return this.prenomAuteur;
     }
 
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * retourne le titre du document
+     * @return le titre du document
      */
     public String getTitre(){
         return this.titre;
     }
 
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * retourne date de publication du document
+     * @return date de publication  du document
      */
     public String getDatePublication(){
         return this.datePublication;
     }
 
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * retourne le nombre d'exemplaire du document
+     * @return le nombre d'exemplaire du document
      */
     public int getNbExemplaire(){
         return this.nbExemplaire;
     }
     
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * retourne la serie du document
+     * @return la serie du document
      */
     public Serie getSerie(){
         return this.serie;
     }
 
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * diminue la quantite du document
+     * @return vrai si l'operation s'est bien passe
      */
     public boolean diminuerQuantite(){
         if(nbExemplaire > 0){
@@ -115,8 +115,8 @@ public abstract class Document{
     }
 
     /**
-     * retourne l'editeur du document
-     * @return l'editeur du livre
+     * augmente la quantite du document
+     * @return vrai si l'operation s'est bien passe
      */
     public boolean augmenterQuantite(){
         nbExemplaire = nbExemplaire + 1;
