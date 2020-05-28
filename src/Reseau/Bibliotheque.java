@@ -103,7 +103,7 @@ public class Bibliotheque {
 	public ArrayList<Document> consulter(String nom){
 		ArrayList<Document> listeDoc = new ArrayList<>();
 		for(Document doc : collection.keySet()){
-			if(doc.getNomAuteur() == nom){
+			if(doc.getNomAuteur().equals(nom)){
 				listeDoc.add(doc);
 			}
 		}
@@ -118,7 +118,7 @@ public class Bibliotheque {
 	public ArrayList<Document> consulterPrenom(String prenom){
 		ArrayList<Document> listeDoc = new ArrayList<>();
 		for(Document doc : collection.keySet()){
-			if(doc.getPrenomAuteur() == prenom){
+			if(doc.getPrenomAuteur().equals(prenom)){
 				listeDoc.add(doc);
 			}
 		}
@@ -134,7 +134,7 @@ public class Bibliotheque {
 	public ArrayList<Document> consulter(String nom, String prenom){
 		ArrayList<Document> listeDoc = new ArrayList<>();
 		for(Document doc : collection.keySet()){
-			if(doc.getPrenomAuteur() == prenom && doc.getNomAuteur() == nom){
+			if(doc.getPrenomAuteur().equals(prenom) && doc.getNomAuteur().equals(nom)){
 				listeDoc.add(doc);
 			}
 		}
@@ -199,13 +199,19 @@ public class Bibliotheque {
 
 		boolean estDedans = false;
 
-		if(collection.isEmpty()){   // Si la collection est vide, ne rien faire
+		if(collection.isEmpty()){                            // Si la collection est vide, ne rien faire
 			System.out.println("Votre collection est vide");
-		}else{						// Si la collection n'est pas vide
+		}else{						                         // Si la collection n'est pas vide
+
+
+			// Le probleme
+			// private HashMap<Document,Integer> collection;// document , nombre d'exemplaire
+
 			typeDoc.add(collection.get(0).getClass().toString());  // On inplemente une partie
 			typeDoc.add(Integer.toString(0));
 			listTypeDoc.add(typeDoc);
 
+			/*
 			for(Document doc : collection.keySet()){ // On parcourt tous les documents
 
 				doc.getDatePublication();
@@ -224,9 +230,17 @@ public class Bibliotheque {
 						typeDoc.set(1, Integer.toString(1));
 						listTypeDoc.add(typeDoc);
 					}
+
+
 					estDedans = false;
+
+
 				}
+
+
 			}
+*/
+
 		}
 		return listTypeDoc;
 	}
@@ -372,16 +386,14 @@ public class Bibliotheque {
                 			if(!searchISBN.containsKey(livre.getISBN())) {//if this ISBN doesn t exist
                 				collection.put(livre,nbExemplaire);
                 				searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);//bd ...
+                    			collection.put(livre,nbExemplaire);
                 			}
                 			else //if this ISBN already exists
                 				return false;
                 		}
         			}
-    				else{//if doc isn t a livre
+    				else//if doc isn t a livre
     					collection.put(doc,nbExemplaire);
-    					searchEAN.put(doc.getEAN(), doc);
-    				}
-    					
     			}
     			else//if this EAN already exists
     				return false;

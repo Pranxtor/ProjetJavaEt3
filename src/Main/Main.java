@@ -35,29 +35,6 @@ public class Main {
         Date dateDebut;
         Date dateFin;
 
-
-
-        Livre ZE = new Livre("ZE", "ZEF", "Mario", "MCH", null, "1234", 234, 213, serie , "VDEFEC");
-        //Jeux E = new Jeux("ZE", "ZEF", "Mario", "MCH", null, "1234", 234, 213, serie );
-/*
-		Bibliotheque abc = new Bibliotheque("ABC", "AZE");
-
-		if(true){
-			System.out.println("er");
-			try{
-				rechercheBibliotheque("ABC").ajouterDocument(new Livre("ZE", "ZEF", "Mario", "MCH", null, "1234", 234, 213, serie , "VDEFEC"),32);
-				//.ajouterDocument(ZE, 324);
-				System.out.println(abc.consulterToutDoc());
-				System.out.println(rechercheBibliotheque("ABC").consulterToutDoc());
-			}catch (ExceptionBibliothequeDoesNotExist e){
-				System.out.println(e.getMessage());
-			}
-		}
-
-
- */
-
-
         boolean fait = false;
 
         Client client = new Client("","");
@@ -88,14 +65,14 @@ public class Main {
 		            System.out.println("Choisissez parmi ces options. Appuyez sur votre touche 1, 2, ... ou 9");
 
 		            System.out.println("1. Ajouter une nouvelle bibliotheque"); // ok
-		            System.out.println("2. Ajouter un nouveau document dans le reseau"); // TODO
+		            System.out.println("2. Ajouter un nouveau document dans le reseau"); // OK
 		            System.out.println("3. Ajouter un nouvel utilisateur"); // ok
 		            System.out.println("4. Consulter tous les documents");  // ok
 		            System.out.println("5. Consulter les documents d'une serie"); // ok
 		            System.out.println("6. Consulter les documents d'un auteur"); // ok
 		            System.out.println("7. Rechercher un livre par son ISBN");    // ok
 		            System.out.println("8. Rechercher un document par son EAN");  // ok
-		            System.out.println("9. Consulter le nombre de documents publies sur une periode"); // ok
+		            System.out.println("9. Consulter le nombre de documents publies sur une periode"); //
 		            System.out.println("10. Emprunter ou rendre un document pour un client"); // ok
 
 		            try{
