@@ -386,14 +386,17 @@ public class Bibliotheque {
                 			if(!searchISBN.containsKey(livre.getISBN())) {//if this ISBN doesn t exist
                 				collection.put(livre,nbExemplaire);
                 				searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);//bd ...
-                    			collection.put(livre,nbExemplaire);
                 			}
                 			else //if this ISBN already exists
                 				return false;
                 		}
         			}
-    				else//if doc isn t a livre
+    				else{//if doc isn t a livre
     					collection.put(doc,nbExemplaire);
+    					searchEAN.put(doc.getEAN(), doc);
+    				}
+    					
+    					
     			}
     			else//if this EAN already exists
     				return false;
