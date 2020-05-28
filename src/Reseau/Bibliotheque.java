@@ -332,7 +332,11 @@ public class Bibliotheque {
 			this.collection.replace(doc, this.collection.get(doc)-1);
 			estFait = true;
 		}
-		else
+		else{
+			biblio.ajouterDocument(doc, 1);
+			this.collection.replace(doc, this.collection.get(doc)-1);
+			estFait = true;
+		}
 			estFait = false;
 		return estFait;
 	}
