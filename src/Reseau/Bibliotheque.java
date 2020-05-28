@@ -3,8 +3,6 @@ package Reseau;
 import Documents.*;
 import Exception.*;
 
-import javax.print.Doc;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

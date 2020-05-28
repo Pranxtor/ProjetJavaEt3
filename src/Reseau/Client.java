@@ -27,10 +27,18 @@ public class Client {
         return nom.ajouterClient(this);
     }
 
+    /**
+     * retourne le nom du client
+     * @return le nom du client
+     */
     public String getNom(){
         return nom;
     }
 
+    /**
+     * retourne le prenom du client
+     * @return le prenom du client
+     */
     public String getPrenom(){
         return prenom;
     }

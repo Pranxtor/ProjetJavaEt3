@@ -231,24 +231,19 @@ public class FileReader
             			Livre l = new Livre(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title),isbn);
             			d.add(l);
             			if(numberCopyAimeCesaire>0) {
-            				System.out.println("1");
             				b1.ajouterDocument(l, numberCopyAimeCesaire);
             			}
             			if(numberCopyEdmondRostand>0) {
             				b2.ajouterDocument(l, numberCopyEdmondRostand);
-            				System.out.println("2");
             			}
             			if(numberCopyJeanPierreMelville>0) {
             				b3.ajouterDocument(l, numberCopyJeanPierreMelville);
-            				System.out.println("3");
             			}
             			if(numberCopyOscarWilde>0) {
             				b4.ajouterDocument(l, numberCopyOscarWilde);
-            				System.out.println("4");
             			}
             			if(numberCopySaintSimon>0) {
             				b5.ajouterDocument(l, numberCopySaintSimon);
-            				System.out.println("5");
             			}
             			break;
             		case "BD":
