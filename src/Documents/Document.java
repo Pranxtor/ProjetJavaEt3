@@ -109,7 +109,15 @@ public abstract class Document{
 				return false;
 		return true;
 	}
-	
+
+    public void afficheDoc(){
+        System.out.println("Titre : " + titre);
+        System.out.println("Editeur : " + editeur);
+        System.out.println("Auteur : " + nomAuteur + " " + prenomAuteur);
+        System.out.println("Date de publication : " + datePublication);
+        System.out.println("EAN : " + EAN);
+    }
+
 	public int compareTo(Document doc) {
 		return this.numeroSerie.compareTo(doc.numeroSerie);
 	}

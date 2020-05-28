@@ -40,7 +40,7 @@ public class Main {
     	
     	if(args.length > 0)
 		{
-			File tempFile = new File(args[0]);
+			java.io.File tempFile = new java.io.File(args[0]);
 			
 			if(tempFile.exists())
 			{
@@ -208,11 +208,11 @@ public class Main {
 		                    prenom = in.next();
 
 		                    if(selection == 1){
-		                        if(nom.isBlank() && !prenom.isBlank()){
+		                        if(nom.isEmpty() && !prenom.isEmpty()){
 		                            consulterPrenomReseau(prenom);
-		                        }else if(!nom.isBlank() && prenom.isBlank()){
+		                        }else if(!nom.isEmpty() && prenom.isEmpty()){
 		                            consulterReseau(nom);
-		                        }else if(!nom.isBlank() && !prenom.isBlank()){
+		                        }else if(!nom.isEmpty() && !prenom.isEmpty()){
 		                            consulterReseau(nom, prenom);
 		                        }else{
 		                            System.out.println("Impossible de mener la recherche");
@@ -222,11 +222,11 @@ public class Main {
 		                            System.out.println("Quel est le nom de la bibliotheque parmi cette liste");
 		                            afficheReseau();
 		                            bibliotheque = in.next();
-		                            if(nom.isBlank() && !prenom.isBlank()){
+		                            if(nom.isEmpty() && !prenom.isEmpty()){
 		                                rechercheBibliotheque(bibliotheque).consulterPrenom(prenom);
-		                            }else if(!nom.isBlank() && prenom.isBlank()){
+		                            }else if(!nom.isEmpty() && prenom.isEmpty()){
 		                                rechercheBibliotheque(bibliotheque).consulter(nom);
-		                            }else if(!nom.isBlank() && !prenom.isBlank()){
+		                            }else if(!nom.isEmpty() && !prenom.isEmpty()){
 		                                rechercheBibliotheque(bibliotheque).consulter(nom, prenom);
 		                            }else{
 		                                System.out.println("Impossible de mener la recherche");

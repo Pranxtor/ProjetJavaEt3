@@ -48,6 +48,9 @@ public class Bibliotheque {
 		}
 	}
 
+
+
+
 	/**
 	 * Methode qui permet de retrouver une bibliotheque a partir de son nom
 	 * @param nom nom de la bibliotheque
