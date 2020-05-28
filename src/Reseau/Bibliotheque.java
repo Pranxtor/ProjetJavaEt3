@@ -419,7 +419,6 @@ public class Bibliotheque {
     	return dedans;
 	}
 
-
 	/**
 	 * Methode qui permet a un client d'emprunter un document dans la bibliotheque
 	 * @param doc le document a emprunter

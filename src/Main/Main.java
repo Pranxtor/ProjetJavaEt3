@@ -526,9 +526,35 @@ public class Main {
 							}
 		                    break;
 						case 11:
-							System.out.println("Echange entre deux bibliotheques");
+							try
+							{
+								System.out.println("Echange entre deux bibliotheques");
+								System.out.println("Bibliotheque donneur");
+								bibliotheque = in.next();
 
+								System.out.println("Bibliotheque receveur");
+								nom = in.next();
 
+								System.out.println("Quel est le document que vous voulez rendre ?");
+								System.out.println("1. Recherchez le document par son ISBN");
+								System.out.println("2. Recherchez le document par son EAN");
+								selection = in.nextInt();
+
+								if(selection == 1){
+									System.out.println("Donner l'ISBN du document");
+									ISBN = in.next();
+									rechercheBibliotheque(bibliotheque).echangeDocument(rechercheBibliotheque(nom),rechercheBibliotheque(bibliotheque).rechercheISBN(ISBN));
+
+								}else if(selection == 2){
+									System.out.println("Donner l'EAN du document");
+									EAN = in.next();
+									rechercheBibliotheque(bibliotheque).echangeDocument(rechercheBibliotheque(nom),rechercheBibliotheque(bibliotheque).rechercheEAN(EAN));
+								}else{
+									System.out.println("Retour au menu");
+								}
+							}catch (ExceptionBibliothequeDoesNotExist e){
+								System.out.println(e.getMessage());
+							}
 							break;
 		                default:
 		                    System.out.println();
