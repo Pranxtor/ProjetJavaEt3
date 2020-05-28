@@ -4,6 +4,9 @@ import Documents.*;
 import Exception.*;
 
 import javax.print.Doc;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -189,8 +192,9 @@ public class Bibliotheque {
 	 * @param debut Debut de la periode qui interresse
 	 * @param fin Fin de la periode qui interresse
 	 * @return Le nombre de documents de chaque type publies entre deux dates
+	 * @throws ParseException 
 	 */
-	public ArrayList<ArrayList<String>> filtreperiode(Date debut, Date fin){
+	public ArrayList<ArrayList<String>> filtreperiode(Date debut, Date fin) throws ParseException{
 
 		ArrayList<ArrayList<String>> listTypeDoc = new ArrayList<>();
 		ArrayList<String> typeDoc = new ArrayList<>();
@@ -205,7 +209,9 @@ public class Bibliotheque {
 			listTypeDoc.add(typeDoc);
 
 			for(Document doc : collection.keySet()){ // On parcourt tous les documents
-				if(doc.getDatePublication().after(debut) && doc.getDatePublication().before(fin)){ // Si on est compris dans la periode
+				doc.getDatePublication();
+				Date date =new SimpleDateFormat("yyyy").parse(doc.getDatePublication());
+				if(date.after(debut) && date.before(fin)){ // Si on est compris dans la periode
 
 					for(ArrayList<String> type : listTypeDoc){ // En parcourant la liste de type de documents deja connu
 						if(type.contains(doc.getClass().toString())){ // Si le type de documents est deja dans la liste de type de document
@@ -231,8 +237,9 @@ public class Bibliotheque {
 	 * @param debut Debut de la periode qui interresse
 	 * @param fin Fin de la periode qui interresse
 	 * @return Le nombre de documents de chaque type publies entre deux dates
+	 * @throws ParseException 
 	 */
-	public static ArrayList<ArrayList<String>> filtreperiodeReseau(Date debut, Date fin){
+	public static ArrayList<ArrayList<String>> filtreperiodeReseau(Date debut, Date fin) throws ParseException{
 		ArrayList<ArrayList<String>> filtre = new ArrayList<>();
 		ArrayList<ArrayList<String>> intermediaire = new ArrayList<>();
 		ArrayList<String> inter = new ArrayList<>();

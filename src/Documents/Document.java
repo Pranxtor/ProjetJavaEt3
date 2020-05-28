@@ -4,76 +4,40 @@ import java.util.Date;
 
 public abstract class Document{
     private String titre;
-    private int numNotice;
     private String editeur;
     private String nomAuteur;
     private String prenomAuteur;
     private String EAN;
-    private Date datePublication;
+    private String datePublication;
     private int nbExemplaire;
     private Integer numeroSerie;//numero dans la serie
     private Serie serie;
 
     /**
-     * Constructeur qui ne prend en compte ni l'EAN ni le numero de série
+     * Constructeur qui ne prend en compte ni l'EAN ni le numero de serie
      * @param titre titre du document
-     * @param numNotice numero de notice
-     * @param editeur editeur du document
-     * @param nomAuteur nom de l'auteur
-     * @param prenomAuteur prenom de l'auteur
-     * @param datePublication date de publication de l'oeuvre
-     * @param nombreExemplaire nombre d'exemplaire dans la bibliotheque
+     * @param editeur
+     * @param nomAuteur
+     * @param prenomAuteur
+     * @param EAN
+     * @param datePublication
+     * @param nombreExemplaire
+     * @param numeroSerie
+     * @param serie
      */
-    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, int nombreExemplaire){
+    public Document(String titre, String editeur, String nomAuteur, String prenomAuteur, String EAN, String datePublication, int nombreExemplaire, Integer numeroSerie, Serie  serie){
         this.titre = titre;
-        this.numNotice = numNotice;
         this.editeur = editeur;
         this.nomAuteur = nomAuteur;
         this.prenomAuteur = prenomAuteur;
+        if(EAN != null)
+        	this.EAN = EAN;
         this.datePublication = datePublication;
         this.nbExemplaire = nombreExemplaire;
-    }
-
-    // Constructeur qui prend en compte l'EAN mais pas le numero de série
-
-    /**
-     * Constructeur qui prend en compte l'EAN mais pas le numero de serie
-     * @param titre titre du document
-     * @param numNotice numero de notice du document
-     * @param editeur editeur du document
-     * @param nomAuteur nom de l'auteur
-     * @param prenomAuteur prenom de l'auteur
-     * @param datePublication date de publication de l'oeuvre
-     * @param EAN EAN du document
-     * @param nombreExemplaire nombre d'exemplaire dans la bibliotheque
-     */
-    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, int nombreExemplaire){
-    	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
-    	this.EAN = EAN;
-    }
-
-    // Constructeur qui prend en compte le numero de série mais pas l'EAN
-    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, Integer numeroSerie, int nombreExemplaire,Serie  serie){
-    	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
-    	this.numeroSerie = numeroSerie;
-    	this.serie=serie;
-    }
-
-    // Constructeur qui prend tout en compte
-    public Document(String titre, int numNotice, String editeur, String nomAuteur, String prenomAuteur, Date datePublication, String EAN, Integer numeroSerie, int nombreExemplaire,Serie  serie){
-    	this(titre,numNotice,editeur,nomAuteur,prenomAuteur,datePublication,nombreExemplaire);
-    	this.numeroSerie = numeroSerie;
-    	this.serie=serie;
-    	this.EAN = EAN;
-    }
-
-    public void afficheDoc(){
-        System.out.println("Titre : " + titre);
-        System.out.println("Numero de notice : " + numNotice);
-        System.out.println("Editeur : " + editeur);
-        System.out.println("Auteur : " + nomAuteur + " " + prenomAuteur);
-        System.out.println("Date de publication : " + datePublication);
-        System.out.println("EAN : " + EAN);
+        if(numeroSerie != null)
+        	this.numeroSerie = numeroSerie;
+        if(serie != null)
+        	this.serie=serie;
     }
 
     public String getEAN(){
@@ -96,11 +60,7 @@ public abstract class Document{
         return this.titre;
     }
 
-    public int getNumNotice(){
-        return this.numNotice;
-    }
-
-    public Date getDatePublication(){
+    public String getDatePublication(){
         return this.datePublication;
     }
 
@@ -129,7 +89,7 @@ public abstract class Document{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numNotice;
+		result = prime * result + titre.hashCode()+((EAN==null)?"":EAN).hashCode() ;
 		return result;
 	}
 
@@ -142,8 +102,11 @@ public abstract class Document{
 		if (getClass() != obj.getClass())
 			return false;
 		Document other = (Document) obj;
-		if (numNotice != other.numNotice)
+		if (titre != other.titre)
 			return false;
+		if(EAN!=null&&other.EAN!=null)
+			if(EAN != other.EAN)
+				return false;
 		return true;
 	}
 	
