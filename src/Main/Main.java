@@ -134,32 +134,38 @@ public class Main {
 								System.out.println("Combien de documents voulez-vous ajouter ?");
 								nombreExemplaire = in.nextInt();
 
-								titre = in.nextLine();
 								System.out.println("Quel est le titre du documents ?");
+								titre = in.next();
 
-								editeur = in.nextLine();
 								System.out.println("Qui est l'editeur ?");
-
-								nom = in.nextLine();
+								editeur = in.next();
 
 								System.out.println("Quel est le nom de l'auteur");
+								nom = in.next();
 
-								prenom = in.nextLine();
 								System.out.println("Quel est le prenom de l'auteur");
+								prenom = in.next();
 
-								debut = in.nextLine();
 								System.out.println("Quelle est la date de publication. Ecrivez sous la forme AAAA");
-
+								debut = in.next();
 								serie = new Serie("AB");
 
-								EAN = in.nextLine();
-								System.out.println("Quel est son EAN");
 
+								System.out.println("Quel est son EAN");
+								EAN = in.next();
+								System.out.println(bibliotheque);
+								System.out.println(numeroSerie);
+								System.out.println(nombreExemplaire);
+								System.out.println(titre);
+								System.out.println(editeur);
 								System.out.println(nom);
+								System.out.println(prenom);
+								System.out.println(debut);
+
 
 								if(selection == 1){
-									ISBN = in.nextLine();
 									System.out.println("Quel est son ISBN ?");
+									ISBN = in.next();
 									if(rechercheBibliotheque(bibliotheque).ajouterDocument(new Livre(titre,editeur,nom,prenom,EAN, date ,nombreExemplaire, numeroSerie, serie, ISBN), nombreExemplaire)){
 										System.out.println(rechercheBibliotheque(bibliotheque).consulterToutDoc());
 										System.out.println("Le document a ete ajoute");
