@@ -1,7 +1,7 @@
 package Reseau;
 
-import Documents.Document;
-import Documents.Livre;
+import Documents.*;
+import Exception.*;
 
 import javax.print.Doc;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Bibliotheque {
 
     private String nom;
     private String adresse;
-    private HashMap<Document,Integer> collection;//document,nombre d'exemplaire
+    private HashMap<Document,Integer> collection;// document , nombre d'exemplaire
     private HashMap<String, Livre> searchISBN;
     private HashMap<String, Document> searchEAN;
     private HashSet<Client> clients;
@@ -49,40 +49,49 @@ public class Bibliotheque {
 	 * Methode qui permet de retrouver une bibliotheque a partir de son nom
 	 * @param nom nom de la bibliotheque
 	 * @return retourne la bibliotheque si elle existe, null sinon
+	 * @throws ExceptionBibliothequeDoesNotExist
 	 */
-	public static Bibliotheque rechercheBibliotheque(String nom){
+	public static Bibliotheque rechercheBibliotheque(String nom) throws ExceptionBibliothequeDoesNotExist{
 		for(Bibliotheque bibliotheque : reseauBibliotheque){
 			if(bibliotheque.nom.equals(nom)){
 				return bibliotheque;
 			}
 		}
-		return null;
+		throw new ExceptionBibliothequeDoesNotExist();
+		//return null;
 	}
 
 	/**
 	 * Methode qui permet de rechercher a partir de l'EAN
 	 * @param EAN Chaine de caractere representant l'EAN
-	 * @return Le document associe a l'EAN, null s'il n'est pas associe a un document
+	 * @return Le document associe a l'EAN
+	 * @throws ExceptionDocumentDoesntExist
 	 */
 	public Document rechercheEAN(String EAN) {
 	   if (searchEAN.containsKey(EAN)) {
 		   return searchEAN.get(EAN);
 	   }
-	   else
+	   else{
+	   		//throw new ExceptionDocumentDoesntExist();
 		   return	null;
+	   }
+
     }
 
 	/**
 	 * Methode qui permet de rechercher a partir de l'ISBN
 	 * @param ISBN Chaine de caractere representant l'ISBN
 	 * @return Le document associe a l'ISBN, null s'il n'est pas associe a un document
+	 * @throws ExceptionDocumentDoesntExist
 	 */
 	public Livre rechercheISBN(String ISBN) {
 	   if (searchISBN.containsKey(ISBN)) {
 		   return searchISBN.get(ISBN);
 	   }
-	   else
+	   else {
+		   //throw new ExceptionDocumentDoesntExist();
 		   return	null;
+	   }
     }
 
 	/**
@@ -305,7 +314,7 @@ public class Bibliotheque {
 	 * @param doc le document que l'on veut echanger
 	 * @return true si l'echange a ete fait, false sinon
 	 */
-	public boolean echangeDocument(Bibliotheque biblio, Document doc){
+	public boolean echangeDocument(Bibliotheque biblio, Document doc) {
 		boolean estFait;
 		if(biblio.collection.containsKey(doc) && this.collection.containsKey(doc)){
 			biblio.collection.replace(doc,biblio.collection.get(doc)+1);
