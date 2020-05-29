@@ -45,7 +45,7 @@ public class Main {
     	ArrayList<Emprunt> emprunts = new ArrayList<>();
     	int i = 0;
     	int j = 0;
-    	
+    	/*
     	if(args.length > 0)
 		{
 			java.io.File tempFile = new java.io.File(args[0]);
@@ -58,7 +58,9 @@ public class Main {
 				FileReader.getDataFromCSVFile(args[0],b,d);
 				
 				System.out.println("[Main] End of the file " + args[0] + ".");
-				
+
+
+    	 */
 				do{
 		            java.util.Scanner in = new Scanner(System.in);
 
@@ -336,12 +338,15 @@ public class Main {
 		                    System.out.println("Autre chiffre. Retour au menu");
 
 		                    selection = in.nextInt();
+							in.nextLine();
 		                    if(selection == 1){
+
 								System.out.println("Entrez son nom. Si vous ne le connaissez pas, appuyez sur entree");
-								nom = in.next();
+								nom = in.nextLine();
 
 								System.out.println("Entrez son prenom. Si vous ne le connaissez pas, appuyez sur entree");
-								prenom = in.next();
+								prenom = in.nextLine();
+
 		                        if(nom.isEmpty() && !prenom.isEmpty()){
 									System.out.println(consulterPrenomReseau(prenom));
 		                        }else if(!nom.isEmpty() && prenom.isEmpty()){
@@ -355,13 +360,15 @@ public class Main {
 		                        try{
 
 									System.out.println("Entrez son nom. Si vous ne le connaissez pas, appuyez sur entree");
-									nom = in.next();
+									nom = in.nextLine();
 
 									System.out.println("Entrez son prenom. Si vous ne le connaissez pas, appuyez sur entree");
-									prenom = in.next();
+									prenom = in.nextLine();
+
 		                            System.out.println("Quel est le nom de la bibliotheque parmi cette liste");
 		                            afficheReseau();
-		                            bibliotheque = in.next();
+		                            bibliotheque = in.nextLine();
+
 		                            if(nom.isEmpty() && !prenom.isEmpty()){
 										System.out.println(rechercheBibliotheque(bibliotheque).consulterPrenom(prenom));
 		                            }else if(!nom.isEmpty() && prenom.isEmpty()){
@@ -572,18 +579,20 @@ public class Main {
 
 		            }catch (InputMismatchException | ParseException e){
 		                System.out.println("Mauvaise selection. Recommencez !");
-		            }
+		            }catch (java.lang.NumberFormatException x){
+		            	System.out.println("Ah ! Ce n'est pas vraiment ce qui était attendu");
+					}
 		        }while(true);
-			}
-			else
-			{
-				System.out.println("[Main] No file " + args[0]);
-			}
-		}
-		else
-		{
-			System.out.println("[Main] You should enter the CSV file path as a parameter.");
-		}
+			//}
+			//else
+			//{
+				//System.out.println("[Main] No file " + args[0]);
+			//}
+		//}
+		//else
+		//{
+			//System.out.println("[Main] You should enter the CSV file path as a parameter.");
+		//}
 
         
     }
