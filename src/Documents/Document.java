@@ -167,7 +167,7 @@ public abstract class Document{
 	public String toString() {
 		return "Document [titre=" + titre + ", editeur=" + editeur + ", nomAuteur=" + nomAuteur + ", prenomAuteur="
 				+ prenomAuteur + ", EAN=" + EAN + ", datePublication=" + datePublication + ", nbExemplaire="
-				+ nbExemplaire + ", numeroSerie=" + numeroSerie + ", serie=" + serie + "]";
+				+ nbExemplaire + ", numeroSerie=" + numeroSerie + ", serie=" + serie.getTitre() + "]";
 	}
 
 	/**

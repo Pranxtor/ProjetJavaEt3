@@ -258,7 +258,7 @@ public class Bibliotheque {
 						estDedans = true;
 					}
 				}
-				if(!estDedans){  // Sinon
+				if(!estDedans){ // Si le filtre ne contient pas le type de document
 					filtre.add((ArrayList<String>) tab.clone());
 				}
 				estDedans = false;
@@ -327,17 +327,40 @@ public class Bibliotheque {
 	 */
 	public boolean echangeDocument(Bibliotheque biblio, Document doc) {
 		boolean estFait;
-		if(biblio.collection.containsKey(doc) && this.collection.containsKey(doc)){
+		if(biblio.collection.containsKey(doc) && this.collection.containsKey(doc)){//si les 2 bibliotheque contiaennt le doc
 			biblio.collection.replace(doc,biblio.collection.get(doc)+1);
-			this.collection.replace(doc, this.collection.get(doc)-1);
+			if(this.collection.get(doc)-1==0) {//si le document etait en un seul exemplaire
+				this.searchEAN.remove(doc.getEAN());//on l'enleve de la collection des EAN
+				this.collection.remove(doc);//on enleve le doc de la bibliotheque
+				if(doc instanceof Livre)//si le doc est un livre
+					this.searchISBN.remove(((Livre) doc).getISBN());//on l'enleve de la collection des ISBN
+			}
+			else
+			{
+				this.collection.replace(doc, this.collection.get(doc)-1);//on enleve un exemplaire du doc de la bibliotheque
+			}
+			
 			estFait = true;
 		}
 		else{
-			biblio.ajouterDocument(doc, 1);
-			this.collection.replace(doc, this.collection.get(doc)-1);
-			estFait = true;
+			if(this.collection.containsKey(doc)) {//si seulemtn la premiere biblioteque contient le doc
+				biblio.ajouterDocument(doc, 1);
+				if(this.collection.get(doc)-1==0) {//si le document etait en un seul exemplaire
+					this.collection.remove(doc);//on enleve le doc de la bibliotheque
+					this.searchEAN.remove(doc.getEAN());//on l'enleve de la collection des EAN
+					if(doc instanceof Livre)//si le doc est un livre
+						this.searchISBN.remove(((Livre) doc).getISBN());//on l'enleve de la collection des ISBN
+				}
+				else
+				{
+					this.collection.replace(doc, this.collection.get(doc)-1);//on enleve un exemplaire du doc de la bibliotheque
+				}
+				estFait = true;
+			}
+			else //si la bibliotheque ne contient pas le document
+				estFait = false;
+			
 		}
-			estFait = false;
 		return estFait;
 	}
 
@@ -347,8 +370,7 @@ public class Bibliotheque {
 	 * @param nbExemplaire le nombre d'exemplaire ajoute
 	 * @return true si l'ajout a ete fait, false sinon
 	 */
-    public boolean ajouterDocument(Document doc,Integer nbExemplaire) {//moi
-    	System.out.println(doc);
+    public boolean ajouterDocument(Document doc,Integer nbExemplaire) {
     	Livre livre = null;
     	if(!collection.containsKey(doc)) {//if the Bibliotheque doesn t contain the doc
     		if(doc.getEAN()==null) {//if doc doesn t have an EAN

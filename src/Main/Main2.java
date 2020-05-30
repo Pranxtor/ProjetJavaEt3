@@ -66,22 +66,6 @@ public class Main2 {
     	ArrayList<Emprunt> emprunts = new ArrayList<>();
     	int i = 0;
     	int j = 0;
-    	/*
-    	if(args.length > 0)
-		{
-			java.io.File tempFile = new java.io.File(args[0]);
-			
-			if(tempFile.exists())
-			{
-				System.out.println("[Main] Reading the file " + args[0] + " ...");
-						
-				//We start by reading the CSV file
-				FileReader.getDataFromCSVFile(args[0],b,d);
-				
-				System.out.println("[Main] End of the file " + args[0] + ".");
-
-
-    	 */
 				do{
 		            java.util.Scanner in = new Scanner(System.in);
 
@@ -110,7 +94,7 @@ public class Main2 {
 
 		                    Bibliotheque biblio = new Bibliotheque(bibliotheque,adresse);
 		                    //b.add(biblio);
-		                    System.out.println("Le reseau est composé de ces bibliotheques");
+		                    System.out.println("Le reseau est compose de ces bibliotheques");
 		                    afficheReseau();
 		                    System.out.println("");
 		                    break;
@@ -618,20 +602,9 @@ public class Main2 {
 		            }catch (InputMismatchException | ParseException e){
 		                System.out.println("Mauvaise selection. Recommencez !");
 		            }catch (java.lang.NumberFormatException x){
-		            	System.out.println("Ah ! Ce n'est pas vraiment ce qui était attendu");
+		            	System.out.println("Ah ! Ce n'est pas vraiment ce qui etait attendu");
 					}
 		        }while(true);
-			//}
-			//else
-			//{
-				//System.out.println("[Main] No file " + args[0]);
-			//}
-		//}
-		//else
-		//{
-			//System.out.println("[Main] You should enter the CSV file path as a parameter.");
-		//}
-
         
     }
 }

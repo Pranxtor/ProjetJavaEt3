@@ -62,7 +62,7 @@ public class Emprunt {
             bibliotheque.rendre(document);
             return true;
         }
-        System.out.println("Vous n'avez pas emprunté ce document");
+        System.out.println("Vous n'avez pas emprunte ce document");
         return false;
     }
 

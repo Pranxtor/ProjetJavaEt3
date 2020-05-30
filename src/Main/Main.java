@@ -88,8 +88,7 @@ public class Main {
 		                    adresse = in.next();
 
 		                    Bibliotheque biblio = new Bibliotheque(bibliotheque,adresse);
-		                    //b.add(biblio);
-		                    System.out.println("Le reseau est composé de ces bibliotheques");
+		                    System.out.println("Le reseau est compose de ces bibliotheques");
 		                    afficheReseau();
 		                    System.out.println("");
 		                    break;
@@ -599,7 +598,7 @@ public class Main {
 		            }catch (InputMismatchException | ParseException e){
 		                System.out.println("Mauvaise selection. Recommencez !");
 		            }catch (java.lang.NumberFormatException x){
-		            	System.out.println("Ah ! Ce n'est pas vraiment ce qui était attendu");
+		            	System.out.println("Ah ! Ce n'est pas vraiment ce qui etait attendu");
 					}
 		        }while(true);
 			}
@@ -611,6 +610,7 @@ public class Main {
 		else
 		{
 			System.out.println("[Main] You should enter the CSV file path as a parameter.");
+			Main2.main(null);
 		}
 
         

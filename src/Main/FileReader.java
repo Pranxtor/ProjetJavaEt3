@@ -227,7 +227,6 @@ public class FileReader
             		
             		switch(type) {
             		case "Livre":
-            			System.out.println("Livre");
             			Livre l = new Livre(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title),isbn);
             			d.add(l);
             			if(numberCopyAimeCesaire>0) {
@@ -247,7 +246,6 @@ public class FileReader
             			}
             			break;
             		case "BD":
-            			System.out.println("BD");
             			BD bd = new BD(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title),isbn);
             			d.add(bd);
             			if(numberCopyAimeCesaire>0) {
@@ -267,7 +265,6 @@ public class FileReader
             			}
             			break;	
             		case "Partition":
-            			System.out.println("Part");
             			Partition partition = new Partition(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title),isbn);
             			d.add(partition);
             			if(numberCopyAimeCesaire>0) {
@@ -287,7 +284,6 @@ public class FileReader
             			}
             			break;	
             		case "CD":
-            			System.out.println("Cd");
             			CD cd = new CD(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title));
             			d.add(cd);
             			if(numberCopyAimeCesaire>0) {
@@ -307,7 +303,6 @@ public class FileReader
             			}
             			break;	
             		case "Carte":
-            			System.out.println("Carte");
             			Carte carte = new Carte(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title),isbn);
             			d.add(carte);
             			if(numberCopyAimeCesaire>0) {
@@ -327,7 +322,6 @@ public class FileReader
             			}
             			break;	
             			case "Revue":
-            				System.out.println("Revie");
             				Revue revue = new Revue(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title));
             				d.add(revue);
             				if(numberCopyAimeCesaire>0) {
@@ -347,7 +341,6 @@ public class FileReader
             				}
             				break;	
             			case "Vinyle":
-            				System.out.println("Vynyl");
             				Vinyle vinyle = new Vinyle(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title));
             				d.add(vinyle);
             				if(numberCopyAimeCesaire>0) {
@@ -367,7 +360,6 @@ public class FileReader
             				}
             				break;	
             			case "JeuxSociete":
-            				System.out.println("js");
             				JeuxSociete jeuxSociete = new JeuxSociete(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title));
             				d.add(jeuxSociete);
             				if(numberCopyAimeCesaire>0) {
@@ -387,7 +379,6 @@ public class FileReader
             				}
             				break;	
             			case "JeuxVideo":
-            				System.out.println("jv");
             				JeuxVideo jeuxVideo = new JeuxVideo(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title));
             				d.add(jeuxVideo);
             				if(numberCopyAimeCesaire>0) {
@@ -407,7 +398,6 @@ public class FileReader
             				}
             				break;	
             			default:
-            				System.out.println("Autre");
             				Autre autre = new Autre(title,publisher,authorName,authorSurname,ean,date,totalCopies,seriesNumber,new Serie(title));
             				d.add(autre);
             				if(numberCopyAimeCesaire>0) {
