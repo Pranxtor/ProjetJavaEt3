@@ -18,7 +18,7 @@ public class Bibliotheque {
     private String adresse;
     private HashMap<Document,Integer> collection;// document , nombre d'exemplaire
     private HashMap<String, Livre> searchISBN;
-    public HashMap<String, Document> searchEAN;
+    private HashMap<String, Document> searchEAN;
     private HashSet<Client> clients;
 
     private static HashSet<Bibliotheque> reseauBibliotheque = new HashSet<>();
@@ -381,6 +381,7 @@ public class Bibliotheque {
                 			if(!searchISBN.containsKey(livre.getISBN())) {//if this ISBN doesn t exist
                 				collection.put(livre,nbExemplaire);
                 				searchISBN.put(((Livre) doc).getISBN(), (Livre)doc);//bd ...
+                				searchEAN.put(doc.getEAN(), doc);
                 			}
                 			else //if this ISBN already exists
                 				return false;
@@ -486,10 +487,7 @@ public class Bibliotheque {
 		return docs;
 	}
 
-	/**
-	 * Methode qui permet de
-	 * @return
-	 */
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -499,11 +497,7 @@ public class Bibliotheque {
 		return result;
 	}
 
-	/**
-	 * Methode qui permet de redefinir l'egalite
-	 * @param obj objet avec lequel on compare
-	 * @return true si l'objet est egal ou bien si c'est le meme, false sinon
-	 */
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

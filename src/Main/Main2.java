@@ -1,21 +1,42 @@
 package Main;
 
-import Documents.*;
-import Reseau.*;
-import Exception.*;
+import static Reseau.Bibliotheque.afficheReseau;
+import static Reseau.Bibliotheque.consulterPrenomReseau;
+import static Reseau.Bibliotheque.consulterReseau;
+import static Reseau.Bibliotheque.consulterSerieReseau;
+import static Reseau.Bibliotheque.consulterToutDocReseau;
+import static Reseau.Bibliotheque.filtreperiodeReseau;
+import static Reseau.Bibliotheque.rechercheBibliotheque;
 
-import javax.print.Doc;
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
+import Documents.Autre;
+import Documents.BD;
+import Documents.CD;
+import Documents.Carte;
+import Documents.Document;
+import Documents.Jeux;
+import Documents.JeuxSociete;
+import Documents.JeuxVideo;
+import Documents.Livre;
+import Documents.Partition;
+import Documents.Revue;
+import Documents.Serie;
+import Documents.Vinyle;
+import Exception.ExceptionBibliothequeDoesNotExist;
+import Exception.ExceptionDocumentDoesntExist;
+import Reseau.Bibliotheque;
+import Reseau.Client;
+import Reseau.Emprunt;
 
-import static Reseau.Bibliotheque.*;
+public class Main2 {
 
-public class Main {
-
-    public static void main(String[] args){
+	public static void main(String[] args){
 
         int selection;
         String titre;
@@ -45,7 +66,7 @@ public class Main {
     	ArrayList<Emprunt> emprunts = new ArrayList<>();
     	int i = 0;
     	int j = 0;
-    	
+    	/*
     	if(args.length > 0)
 		{
 			java.io.File tempFile = new java.io.File(args[0]);
@@ -60,7 +81,7 @@ public class Main {
 				System.out.println("[Main] End of the file " + args[0] + ".");
 
 
-    	 
+    	 */
 				do{
 		            java.util.Scanner in = new Scanner(System.in);
 
@@ -117,8 +138,6 @@ public class Main {
 								System.out.println("11. Autre");
 								
 								selection = in.nextInt();
-
-								
 
 								System.out.println("Combien de documents voulez-vous ajouter ?");
 								nombreExemplaire = in.nextInt();
@@ -602,19 +621,17 @@ public class Main {
 		            	System.out.println("Ah ! Ce n'est pas vraiment ce qui était attendu");
 					}
 		        }while(true);
-			}
-			else
-			{
-				System.out.println("[Main] No file " + args[0]);
-			}
-		}
-		else
-		{
-			System.out.println("[Main] You should enter the CSV file path as a parameter.");
-		}
+			//}
+			//else
+			//{
+				//System.out.println("[Main] No file " + args[0]);
+			//}
+		//}
+		//else
+		//{
+			//System.out.println("[Main] You should enter the CSV file path as a parameter.");
+		//}
 
         
     }
-
-
 }

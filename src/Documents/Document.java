@@ -124,9 +124,7 @@ public abstract class Document{
     }
 
     
-    /**
-     * @inheritDoc
-     */
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -135,9 +133,7 @@ public abstract class Document{
 		return result;
 	}
 
-	/**
-     * @inheritDoc
-     */
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -164,9 +160,17 @@ public abstract class Document{
         System.out.println("Auteur : " + nomAuteur + " " + prenomAuteur);
         System.out.println("Date de publication : " + datePublication);
         System.out.println("EAN : " + EAN);
+        System.out.println("type : " + this.getClass());
     }
 
-    /**
+    @Override
+	public String toString() {
+		return "Document [titre=" + titre + ", editeur=" + editeur + ", nomAuteur=" + nomAuteur + ", prenomAuteur="
+				+ prenomAuteur + ", EAN=" + EAN + ", datePublication=" + datePublication + ", nbExemplaire="
+				+ nbExemplaire + ", numeroSerie=" + numeroSerie + ", serie=" + serie + "]";
+	}
+
+	/**
      * compare le document avec un autre document
      * @param doc le document avec lequel on compare
      * @return un entier negatif, zero, ou un entier positif si le document
@@ -176,11 +180,5 @@ public abstract class Document{
 		return this.numeroSerie.compareTo(doc.numeroSerie);
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-    @Override
-    public String toString() {
-        return titre;
-    }
+
 }
